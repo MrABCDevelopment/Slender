@@ -3,6 +3,7 @@ package me.dreamdevs.github.slender.commands;
 import lombok.Getter;
 import me.dreamdevs.github.slender.SlenderMain;
 import me.dreamdevs.github.slender.commands.arguments.ArenaCreateArgument;
+import me.dreamdevs.github.slender.commands.arguments.ArenaEditArgument;
 import me.dreamdevs.github.slender.commands.arguments.SetLobbyArgument;
 import me.dreamdevs.github.slender.utils.ColourUtil;
 import org.bukkit.command.Command;
@@ -23,6 +24,7 @@ public class CommandHandler implements TabExecutor {
         this.arguments = new HashMap<>();
         registerCommand("setlobby", SetLobbyArgument.class);
         registerCommand("createarena", ArenaCreateArgument.class);
+        registerCommand("editarena", ArenaEditArgument.class);
         plugin.getCommand("stopitslender").setExecutor(this);
         plugin.getCommand("stopitslender").setTabCompleter(this);
     }
@@ -37,11 +39,11 @@ public class CommandHandler implements TabExecutor {
                     if(commandSender.hasPermission(argument.getPermission())) {
                         argument.execute(commandSender, strings);
                     } else {
-                        commandSender.sendMessage(ColourUtil.colorize("&cYou don't have permission to do this!"));
+                        commandSender.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("no-permission"));
                     }
                     return true;
                 } else {
-                    commandSender.sendMessage(ColourUtil.colorize("&cArgument doesn't exist!"));
+                    commandSender.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("no-argument"));
                     return true;
                 }
             } else {

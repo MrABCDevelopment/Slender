@@ -3,6 +3,7 @@ package me.dreamdevs.github.slender.commands.arguments;
 import me.dreamdevs.github.slender.SlenderMain;
 import me.dreamdevs.github.slender.commands.ArgumentCommand;
 import me.dreamdevs.github.slender.game.Lobby;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -16,8 +17,10 @@ public class SetLobbyArgument implements ArgumentCommand {
         }
         Player player = (Player) commandSender;
         Lobby lobby = SlenderMain.getInstance().getLobby();
-        lobby.setLobbyLocation(lobby.getLobbyLocation());
-        lobby.saveLobby();
+        lobby.saveLobby(player);
+        Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> {
+            player.teleport(lobby.getLobbyLocation());
+        }, 60L);
         player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("lobby-set-successfully"));
         return true;
     }

@@ -6,10 +6,8 @@ import me.dreamdevs.github.slender.SlenderMain;
 import me.dreamdevs.github.slender.api.events.SlenderGameEndEvent;
 import me.dreamdevs.github.slender.api.events.SlenderGameStartEvent;
 import me.dreamdevs.github.slender.utils.ColourUtil;
+import me.dreamdevs.github.slender.utils.CustomItem;
 import me.dreamdevs.github.slender.utils.Util;
-import me.libraryaddict.disguise.DisguiseAPI;
-import me.libraryaddict.disguise.disguisetypes.DisguiseType;
-import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
@@ -18,6 +16,7 @@ import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.*;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -41,6 +40,7 @@ public class Arena extends BukkitRunnable {
     private int timer;
     private Location slenderSpawnLocation;
     private List<Location> survivorsLocations;
+    private List<Location> pagesLocations;
     private ArenaState arenaState;
     private Map<Player, Role> players;
     private Player slenderMan;
@@ -59,6 +59,7 @@ public class Arena extends BukkitRunnable {
         this.arenaState = ArenaState.WAITING;
         this.players = new ConcurrentHashMap<>();
         this.survivorsLocations = new ArrayList<>();
+        this.pagesLocations = new ArrayList<>();
         this.bossBar = Bukkit.createBossBar(ColourUtil.colorize("&c&lStop It Slender!"), BarColor.RED, BarStyle.SOLID, BarFlag.DARKEN_SKY);
         this.slenderMan = null;
 
@@ -92,6 +93,7 @@ public class Arena extends BukkitRunnable {
                 sendPlayersToGame();
                 setArenaState(ArenaState.RUNNING);
                 setTimer(gameTime);
+                spawnPage();
                 SlenderGameStartEvent slenderGameStartEvent = new SlenderGameStartEvent(this);
                 Bukkit.getPluginManager().callEvent(slenderGameStartEvent);
                 return;
@@ -134,8 +136,13 @@ public class Arena extends BukkitRunnable {
         }
 
         if(arenaState == ArenaState.RESTARTING) {
+            Bukkit.getWorlds().forEach(world -> world.getEntities().stream().filter(entity -> entity instanceof Item).forEach(entity -> entity.remove()));
             this.bossBar.setTitle(ColourUtil.colorize("&c&lStop It Slender!"));
-            this.scoreboard.getTeams().forEach(team -> team.getPlayers().clear());
+            this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+            this.scoreboard.registerNewObjective(id, "dummy", id);
+
+            this.scoreboard.registerNewTeam("survivors");
+            this.scoreboard.registerNewTeam("slenderman");
             this.slenderMan = null;
             Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> setArenaState(ArenaState.WAITING), 100L);
         }
@@ -144,19 +151,23 @@ public class Arena extends BukkitRunnable {
 
     private void sendPlayersToGame() {
         List<Player> tempList = new ArrayList<>(players.keySet());
-        this.slenderMan = tempList.get(Util.getRandomNumber(tempList.size()));
+        int size = tempList.size();
+        int random = Util.getRandomNumber(size);
+        this.slenderMan = tempList.get(random);
         tempList.remove(slenderMan);
         tempList.forEach(player -> players.put(player, Role.SURVIVOR));
         players.put(slenderMan, Role.SLENDER);
 
         slenderMan.getScoreboard().getTeam("slenderman").addPlayer(slenderMan);
+        slenderMan.getInventory().clear();
+        slenderMan.getInventory().setItem(0, CustomItem.SLENDERMAN_WEAPON.toItemStack());
 
         tempList.forEach(player -> {
             player.teleport(survivorsLocations.get(Util.getRandomNumber(survivorsLocations.size())));
             player.getScoreboard().getTeam("survivors").addPlayer(player);
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, Integer.MAX_VALUE));
+            player.getInventory().clear();
         });
-        DisguiseAPI.disguiseToAll(slenderMan, new MobDisguise(DisguiseType.ENDERMAN));
 
         slenderMan.teleport(slenderSpawnLocation);
         slenderMan.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, Integer.MAX_VALUE));
@@ -176,8 +187,19 @@ public class Arena extends BukkitRunnable {
             SlenderMain.getInstance().getGameManager().leaveGame(player, this);
         });
         setArenaState(ArenaState.RESTARTING);
+        this.scoreboard = null;
         players.clear();
         setCollectedPages(0);
+    }
+
+    public void spawnPage() {
+        ItemStack itemStack = new ItemStack(Material.PAPER);
+
+        Item item = slenderSpawnLocation.getWorld().dropItem(getPagesLocations().get(Util.getRandomNumber(getPagesLocations().size())), itemStack);
+        item.setCustomName(ColourUtil.colorize("&6Page "+(collectedPages+1)));
+        item.setCustomNameVisible(true);
+
+        sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-page-spawned-announcement"));
     }
 
     public void sendMessage(String message) {

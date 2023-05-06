@@ -6,7 +6,7 @@ import me.dreamdevs.github.slender.api.menu.MenuItem;
 import me.dreamdevs.github.slender.game.Arena;
 import me.dreamdevs.github.slender.game.ArenaState;
 import me.dreamdevs.github.slender.game.GamePlayer;
-import me.dreamdevs.github.slender.utils.ColourUtil;
+import me.dreamdevs.github.slender.menu.SpectatorMenu;
 import me.dreamdevs.github.slender.utils.CustomItem;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -46,7 +46,7 @@ public class PlayerInteractListener implements Listener {
                             .action(itemAction -> {
                                 itemAction.getPlayer().closeInventory();
                                 SlenderMain.getInstance().getGameManager().joinGame(player, arena);
-                            });
+                            }).build();
                     menu.addItem(menuItem);
                 });
                 menu.open(player);
@@ -79,11 +79,17 @@ public class PlayerInteractListener implements Listener {
                                 || rArena.getArenaState() == ArenaState.STARTING)
                                 && !rArena.getPlayers().containsKey(player)).findFirst().orElse(null);
                 if(randomArena == null) {
-                    player.sendMessage(ColourUtil.colorize("&cThere are no available arenas!"));
+                    player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("no-availble-arenas"));
                     return;
                 }
                 SlenderMain.getInstance().getGameManager().leaveGame(player, arena);
                 SlenderMain.getInstance().getGameManager().joinGame(player, randomArena);
+            }
+
+            if (itemStack.getItemMeta().getDisplayName().equals(CustomItem.SPECTATOR_TOOL.getDisplayName())) {
+                event.setCancelled(true);
+                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, (float) Math.random());
+                new SpectatorMenu(player);
             }
         }
     }

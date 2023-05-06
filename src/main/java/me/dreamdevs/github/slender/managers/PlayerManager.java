@@ -4,7 +4,6 @@ import lombok.Getter;
 import me.dreamdevs.github.slender.SlenderMain;
 import me.dreamdevs.github.slender.game.GamePlayer;
 import me.dreamdevs.github.slender.utils.CustomItem;
-import me.libraryaddict.disguise.DisguiseAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.attribute.Attribute;
@@ -55,10 +54,6 @@ public class PlayerManager {
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20);
         player.setHealth(20);
         player.getActivePotionEffects().stream().map(PotionEffect::getType).forEach(player::removePotionEffect);
-
-        if(SlenderMain.getInstance().getServer().getPluginManager().getPlugin("LibsDisguise") != null) {
-            DisguiseAPI.undisguiseToAll(player);
-        }
 
         Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
             if(SlenderMain.getInstance().getGameManager().isInArena(onlinePlayer)) {

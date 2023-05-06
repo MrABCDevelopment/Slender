@@ -1,9 +1,0 @@
-
-1
-java:S36262"Remove this redundant jump.(ûÁİ…
-^
-java:S5361I"HReplace this call to "replaceAll()" by a call to the "replace()" method.(‰ÛÍ’
-G
-java:S1602S",Remove useless curly braces around statement(ŠÀªÿÿÿÿÿ
-X
-java:S1874j"=Remove this use of "PlayerPickupItemEvent"; it is deprecated.(ïşé üÿÿÿÿ

@@ -7,6 +7,7 @@ import me.dreamdevs.github.slender.api.events.SlenderQuitArenaEvent;
 import me.dreamdevs.github.slender.game.Arena;
 import me.dreamdevs.github.slender.game.ArenaState;
 import me.dreamdevs.github.slender.game.GamePlayer;
+import me.dreamdevs.github.slender.game.Role;
 import me.dreamdevs.github.slender.utils.CustomItem;
 import me.dreamdevs.github.slender.utils.Util;
 import org.bukkit.Bukkit;
@@ -33,10 +34,10 @@ public class GameManager {
     }
 
     public void joinGame(Player player, Arena arena) {
-        if(arena.getArenaState() != ArenaState.WAITING || arena.getArenaState() != ArenaState.STARTING) {
-            player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("game-running"));
-            return;
-        }
+        //if(arena.getArenaState() != ArenaState.WAITING || arena.getArenaState() != ArenaState.STARTING) {
+        //    player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("game-running"));
+        //    return;
+        //}
         if(arena.getPlayers().size() >= arena.getMaxPlayers()) {
             player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("game-full"));
             return;
@@ -48,8 +49,10 @@ public class GameManager {
         }
         player.teleport(arena.getSlenderSpawnLocation());
         gamePlayer.clearInventory();
+        player.setScoreboard(arena.getScoreboard());
         player.getInventory().setItem(8, CustomItem.LEAVE.toItemStack());
-        arena.getPlayers().put(player, null);
+        arena.getPlayers().put(player, Role.NONE);
+        arena.getBossBar().addPlayer(player);
         Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
             player.hidePlayer(SlenderMain.getInstance(), onlinePlayer);
             onlinePlayer.hidePlayer(SlenderMain.getInstance(), player);
@@ -79,6 +82,7 @@ public class GameManager {
         SlenderMain.getInstance().getPlayerManager().sendToLobby(player);
         SlenderMain.getInstance().getPlayerManager().loadLobby(player);
         arena.getPlayers().remove(player);
+        arena.getBossBar().removePlayer(player);
 
         SlenderQuitArenaEvent slenderQuitArenaEvent = new SlenderQuitArenaEvent(gamePlayer, arena);
         Bukkit.getPluginManager().callEvent(slenderQuitArenaEvent);
@@ -105,6 +109,10 @@ public class GameManager {
         for(String s : configuration.getStringList("GameSettings.SurvivorsLocations"))
             locations.add(Util.getStringLocation(s, true));
         arena.setSurvivorsLocations(locations);
+        List<Location> locations1 = new ArrayList<>();
+        for(String s : configuration.getStringList("GameSettings.PagesLocations"))
+            locations1.add(Util.getStringLocation(s, true));
+        arena.setPagesLocations(locations1);
         arena.startGame();
         arenas.add(arena);
     }
@@ -125,6 +133,12 @@ public class GameManager {
             locations.add(line);
         }
         configuration.set("GameSettings.SurvivorsLocations", locations);
+        List<String> locations1 = new ArrayList<>();
+        for(Location location : arena.getPagesLocations()) {
+            String line = Util.getLocationString(location, true);
+            locations1.add(line);
+        }
+        configuration.set("GameSettings.PagesLocations", locations1);
         try {
             configuration.save(f);
         } catch (IOException e) { }
@@ -132,6 +146,10 @@ public class GameManager {
 
     public boolean isInArena(Player player) {
         return arenas.stream().filter(arena -> arena.getPlayers().containsKey(player)).findFirst().orElse(null) != null;
+    }
+
+    public Arena getArena(String id) {
+        return arenas.stream().filter(arena -> arena.getId().equalsIgnoreCase(id)).findAny().orElse(null);
     }
 
     public void saveGames() {

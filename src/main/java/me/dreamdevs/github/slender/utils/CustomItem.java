@@ -3,7 +3,6 @@ package me.dreamdevs.github.slender.utils;
 import lombok.Getter;
 import me.dreamdevs.github.slender.SlenderMain;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -22,7 +21,6 @@ public enum CustomItem {
     PLAY_AGAIN(Material.PAPER, SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getString("items.play-again.DisplayName"),
             SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.play-again.Lore")),
     SPECTATOR_TOOL(Material.STICK, "&bSpectator Menu", new ArrayList<>()),
-    ARENA_EDITOR(Material.NETHER_STAR, "&dArena Editor", new ArrayList<>()),
 
     // SlenderMan's items
     SLENDERMAN_WEAPON(Material.IRON_SWORD, "&cSlenderMan's Sword", new ArrayList<>());

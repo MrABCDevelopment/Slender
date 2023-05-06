@@ -1,5 +1,6 @@
 package me.dreamdevs.github.slender.commands.arguments;
 
+import me.dreamdevs.github.slender.SlenderMain;
 import me.dreamdevs.github.slender.commands.ArgumentCommand;
 import me.dreamdevs.github.slender.game.Arena;
 import me.dreamdevs.github.slender.utils.ColourUtil;
@@ -18,6 +19,7 @@ public class ArenaCreateArgument implements ArgumentCommand {
         arena.setMinPlayers(2);
         arena.setMaxPlayers(10);
         arena.setSlenderSpawnLocation(null);
+        SlenderMain.getInstance().getGameManager().getArenas().add(arena);
         commandSender.sendMessage(ColourUtil.colorize("&aYou created new arena with ID: "+arena.getId()+"!"));
         return true;
     }

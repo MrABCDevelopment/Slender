@@ -36,11 +36,15 @@ public class Lobby {
             player.sendMessage(ColourUtil.colorize("&cLobby is not set!"));
     }
 
-    public void saveLobby() {
+    public void saveLobby(Player player) {
+        lobbyLocation = player.getLocation().clone();
         try {
+
             configuration.set("lobby.location", Util.getLocationString(lobbyLocation, true));
             configuration.save(lobbyFile);
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            Util.sendPluginMessage("&cSomething went wrong, could not save lobby location!");
+        }
     }
 
 }

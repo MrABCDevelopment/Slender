@@ -12,9 +12,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -69,7 +69,7 @@ public class GameListeners implements Listener {
             slender.setExp(slender.getExp()+5);
             arena.getSlenderMan().sendMessage(ColourUtil.colorize("&a+5 Exp"));
 
-            event.getEntity().getLocation().getWorld().strikeLightning(event.getEntity().getLocation());
+            event.getEntity().getLocation().getWorld().strikeLightningEffect(event.getEntity().getLocation());
             arena.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-killed-by-slenderman").replaceAll("%PLAYER%", gamePlayer.getPlayer().getName()));
             Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> {
                 gamePlayer.getPlayer().spigot().respawn();
@@ -80,9 +80,7 @@ public class GameListeners implements Listener {
 
         if(arena.getPlayers().get(gamePlayer.getPlayer()) == Role.SLENDER) {
             arena.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-slenderman-killed"));
-            Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> {
-                gamePlayer.getPlayer().spigot().respawn();
-            }, 4L);
+            Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> gamePlayer.getPlayer().spigot().respawn(), 4L);
         }
     }
 
@@ -99,6 +97,13 @@ public class GameListeners implements Listener {
             gamePlayer.getPlayer().getInventory().setItem(4, CustomItem.SPECTATOR_TOOL.toItemStack());
             gamePlayer.getPlayer().getInventory().setItem(7, CustomItem.PLAY_AGAIN.toItemStack());
             gamePlayer.getPlayer().getInventory().setItem(8, CustomItem.LEAVE.toItemStack());
+            gamePlayer.getPlayer().setAllowFlight(true);
+            gamePlayer.getPlayer().setFlying(true);
+        } else if(arena.getPlayers().get(gamePlayer.getPlayer()) == Role.SLENDER) {
+            event.setRespawnLocation(gamePlayer.getArena().getSlenderSpawnLocation());
+            event.getPlayer().getInventory().clear();
+            event.getPlayer().getInventory().setItem(0, CustomItem.SLENDERMAN_WEAPON.toItemStack());
+            Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, Integer.MAX_VALUE)), 2L);
         }
     }
 
@@ -120,7 +125,9 @@ public class GameListeners implements Listener {
                 player.getInventory().setItem(7, CustomItem.PLAY_AGAIN.toItemStack());
                 player.getInventory().setItem(8, CustomItem.LEAVE.toItemStack());
             });
+            return;
         }
+        arena.spawnPage();
     }
 
 }
