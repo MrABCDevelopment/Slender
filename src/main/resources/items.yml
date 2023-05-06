@@ -1,0 +1,21 @@
+items:
+  arena-selector:
+    DisplayName: '&a&lArena Selector'
+    Lore:
+      - ''
+      - '&eRight-click to open &a&lArena Selector'
+  leave:
+    DisplayName: '&c&lLeave'
+    Lore:
+      - ''
+      - '&eRight-click to leave arena.'
+  profile:
+    DisplayName: '&b&lMy Profile'
+    Lore:
+      - ''
+      - '&eRight-click to open &b&lMy Profile'
+  play-again:
+    DisplayName: '&a&lPlay Again'
+    Lore:
+      - ''
+      - '&eRight-click to &b&lPlay Again'

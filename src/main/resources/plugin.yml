@@ -1,0 +1,14 @@
+name: ${project.artifactId}
+version: ${project.version}
+main: me.dreamdevs.github.slender.SlenderMain
+author: DreamDevs
+api-version: 1.13
+
+softdepend:
+  - ProtocolLib
+  - LibsDisguise
+
+commands:
+  stopitslender:
+    aliases: [slender, slenderman, sis]
+    description: Main StopItSlender command
