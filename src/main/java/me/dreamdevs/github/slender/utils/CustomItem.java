@@ -22,6 +22,8 @@ public enum CustomItem {
             SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.play-again.Lore")),
     SPECTATOR_TOOL(Material.STICK, "&bSpectator Menu", new ArrayList<>()),
 
+    SHOP_ITEM(Material.DIAMOND, "&3Shop", ColourUtil.colouredLore("", "&eRight-click to open &3Shop")),
+
     SURVIVOR_WEAPON(Material.WOODEN_SWORD, "&bSurvivor's Sword", new ArrayList<>()),
 
     // SlenderMan's items

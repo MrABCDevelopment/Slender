@@ -13,7 +13,9 @@ import me.dreamdevs.github.slender.managers.ConfigManager;
 import me.dreamdevs.github.slender.managers.GameManager;
 import me.dreamdevs.github.slender.managers.MessagesManager;
 import me.dreamdevs.github.slender.managers.PlayerManager;
+import me.dreamdevs.github.slender.utils.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -28,6 +30,8 @@ public class SlenderMain extends JavaPlugin {
     private MessagesManager messagesManager;
     private Database database;
 
+    private boolean useLibsDisguises = false;
+
     @Override
     public void onEnable() {
         instance = this;
@@ -39,6 +43,13 @@ public class SlenderMain extends JavaPlugin {
         this.database.connect("YAML");
 
         this.messagesManager = new MessagesManager(this);
+
+        if(getServer().getPluginManager().getPlugin("LibsDisguises") != null) {
+            useLibsDisguises = true;
+            Util.sendPluginMessage("&aLibsDisguises detected!");
+        } else {
+            Util.sendPluginMessage("&cLibsDisguises did not detected!");
+        }
 
         this.lobby = new Lobby();
         this.gameManager = new GameManager();
@@ -54,7 +65,7 @@ public class SlenderMain extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        Bukkit.getWorlds().forEach(world -> world.getEntities().stream().filter(entity -> entity instanceof Item).forEach(entity -> entity.remove()));
+        Bukkit.getWorlds().forEach(world -> world.getEntities().stream().filter(Item.class::isInstance).forEach(Entity::remove));
 
         for(GamePlayer gamePlayer : getPlayerManager().getPlayers())
             this.database.saveData(gamePlayer);

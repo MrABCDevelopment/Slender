@@ -12,12 +12,13 @@ messages:
   arena-slenderman-left-game: '&eSlenderMan left the game!'
   arena-survivor-left-game: '&e%PLAYER% left the game!'
   arena-page-spawned-announcement: '&eThe page was spawned somewhere in the dark!'
+  arena-spectator-mode: '&eYou are now spectator!'
 
   # Admin and console messages
   console-only-player: '&cConsole cannot performs this command.'
   lobby-set-successfully: '&aYou set the lobby!'
 
-  no-availble-arenas: '&cThere are no available arenas!'
+  no-available-arenas: '&cThere are no available arenas!'
   no-permission: '&cYou do not have permission to do this!'
   no-argument: '&cArgument does not exist!'
   no-arena: '&cThere is no map with this ID!'

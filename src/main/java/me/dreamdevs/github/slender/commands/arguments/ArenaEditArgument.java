@@ -16,6 +16,10 @@ public class ArenaEditArgument implements ArgumentCommand {
             commandSender.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("console-only-player"));
             return true;
         }
+        if(args.length > 2) {
+            commandSender.sendMessage(ColourUtil.colorize("&cToo many arguments!"));
+            return true;
+        }
         if(args[1] == null) {
             commandSender.sendMessage(ColourUtil.colorize("&cThere's no ID! Type any id to create an arena!"));
             return true;
@@ -32,7 +36,7 @@ public class ArenaEditArgument implements ArgumentCommand {
 
     @Override
     public String getHelpText() {
-        return "";
+        return "&a/stopitslender editarena <id> - edits an arena with specific ID";
     }
 
     @Override

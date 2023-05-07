@@ -2,6 +2,7 @@ package me.dreamdevs.github.slender.listeners;
 
 import me.dreamdevs.github.slender.SlenderMain;
 import me.dreamdevs.github.slender.game.Arena;
+import me.dreamdevs.github.slender.game.ArenaState;
 import me.dreamdevs.github.slender.game.GamePlayer;
 import me.dreamdevs.github.slender.game.Role;
 import me.dreamdevs.github.slender.utils.ColourUtil;
@@ -64,6 +65,7 @@ public class GameListeners implements Listener {
         if(arena.getPlayers().get(gamePlayer.getPlayer()) == Role.SURVIVOR) {
             GamePlayer slender = SlenderMain.getInstance().getPlayerManager().getPlayer(arena.getSlenderMan());
             slender.setExp(slender.getExp()+5);
+            slender.setKilledSurvivors(slender.getKilledSurvivors()+1);
             arena.getSlenderMan().sendMessage(ColourUtil.colorize("&a+5 Exp"));
 
             arena.getPlayers().put(gamePlayer.getPlayer(), Role.SPECTATOR);
@@ -75,13 +77,15 @@ public class GameListeners implements Listener {
             arena.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-killed-by-slenderman").replaceAll("%PLAYER%", gamePlayer.getPlayer().getName()));
             Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> {
                 gamePlayer.getPlayer().spigot().respawn();
-                gamePlayer.getPlayer().sendMessage(ColourUtil.colorize("&eYou are now spectator!"));
+                gamePlayer.getPlayer().sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-spectator-mode"));
             }, 4L);
 
         }
 
         if(arena.getPlayers().get(gamePlayer.getPlayer()) == Role.SLENDER) {
             arena.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-slenderman-killed"));
+            GamePlayer killer = SlenderMain.getInstance().getPlayerManager().getPlayer(gamePlayer.getPlayer().getKiller());
+            killer.setKilledSlenderMen(killer.getKilledSlenderMen()+1);
             Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> gamePlayer.getPlayer().spigot().respawn(), 4L);
         }
     }
@@ -92,7 +96,7 @@ public class GameListeners implements Listener {
         if(!gamePlayer.isInArena())
             return;
         Arena arena = gamePlayer.getArena();
-        if(arena.getPlayers().get(gamePlayer.getPlayer()) == Role.SURVIVOR || arena.getPlayers().get(gamePlayer.getPlayer()) == Role.SPECTATOR) {
+        if((arena.getPlayers().get(gamePlayer.getPlayer()) == Role.SURVIVOR || arena.getPlayers().get(gamePlayer.getPlayer()) == Role.SPECTATOR || arena.getPlayers().get(gamePlayer.getPlayer()) == Role.NONE) && (arena.getArenaState() == ArenaState.RUNNING || arena.getArenaState() == ArenaState.ENDING)) {
             event.setRespawnLocation(gamePlayer.getArena().getSlenderSpawnLocation());
             arena.getPlayers().entrySet().stream().filter(playerRoleEntry -> playerRoleEntry.getValue() != Role.SPECTATOR).map(Map.Entry::getKey).forEach(player -> player.hidePlayer(SlenderMain.getInstance(), gamePlayer.getPlayer()));
             gamePlayer.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, Integer.MAX_VALUE));

@@ -39,7 +39,7 @@ public class SpectatorMenu {
         MenuItem teleportToRandomPlayer = new MenuItem().material(Material.PLAYER_HEAD).name("&aRandom Player").action(event -> {
             GamePlayer gamePlayer = SlenderMain.getInstance().getPlayerManager().getPlayer(player);
             Arena arena = gamePlayer.getArena();
-            Location location = arena.getPlayers().entrySet().stream().filter(playerRoleEntry -> playerRoleEntry.getValue() != Role.SPECTATOR || playerRoleEntry.getValue() != Role.NONE).map(Map.Entry::getKey).map(Player::getLocation).findAny().orElse(null);
+            Location location = arena.getPlayers().entrySet().stream().filter(playerRoleEntry -> playerRoleEntry.getValue() == Role.SURVIVOR || playerRoleEntry.getValue() == Role.SLENDER).map(Map.Entry::getKey).map(Player::getLocation).findAny().orElse(null);
             if(location != null) {
                 player.teleport(location);
             }

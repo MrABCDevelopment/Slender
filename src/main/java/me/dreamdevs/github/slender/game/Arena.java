@@ -8,6 +8,9 @@ import me.dreamdevs.github.slender.api.events.SlenderGameStartEvent;
 import me.dreamdevs.github.slender.utils.ColourUtil;
 import me.dreamdevs.github.slender.utils.CustomItem;
 import me.dreamdevs.github.slender.utils.Util;
+import me.libraryaddict.disguise.DisguiseAPI;
+import me.libraryaddict.disguise.disguisetypes.DisguiseType;
+import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
@@ -159,6 +162,12 @@ public class Arena extends BukkitRunnable {
 
         slenderMan.teleport(slenderSpawnLocation);
         slenderMan.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, Integer.MAX_VALUE));
+        if(SlenderMain.getInstance().isUseLibsDisguises()) {
+            DisguiseAPI.disguiseToAll(slenderMan, new MobDisguise(DisguiseType.ENDERMAN));
+            DisguiseAPI.setActionBarShown(slenderMan, false);
+            DisguiseAPI.setViewDisguiseToggled(slenderMan, false);
+        }
+
     }
 
     private void sendTitleToAllPlayers(String title, String subTitle, int fadeIn, int stayIn, int fadeOut) {
@@ -184,6 +193,7 @@ public class Arena extends BukkitRunnable {
 
     public void endGame() {
         this.bossBar.setTitle(ColourUtil.colorize("&cTeleport to lobby in "+timer+" seconds..."));
+
         if(getCollectedPages() < 8) {
             sendTitleToAllPlayers("&c&lStop It Slender!", "&cSlenderMan won the game!", 10, 50, 10);
 
@@ -199,6 +209,7 @@ public class Arena extends BukkitRunnable {
         }
 
         getPlayers().keySet().forEach(player -> {
+            getPlayers().put(player, Role.NONE);
             player.getInventory().clear();
             player.getActivePotionEffects().stream().map(PotionEffect::getType).forEach(player::removePotionEffect);
             player.getInventory().setItem(7, CustomItem.PLAY_AGAIN.toItemStack());

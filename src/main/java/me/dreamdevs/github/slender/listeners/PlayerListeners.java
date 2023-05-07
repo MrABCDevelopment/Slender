@@ -10,10 +10,7 @@ import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 
 public class PlayerListeners implements Listener {
 
@@ -49,14 +46,13 @@ public class PlayerListeners implements Listener {
 
     @EventHandler
     public void chatEvent(AsyncPlayerChatEvent event) {
-        event.setCancelled(true);
         GamePlayer gamePlayer = SlenderMain.getInstance().getPlayerManager().getPlayer(event.getPlayer());
+        event.getRecipients().clear();
         if(gamePlayer.isInArena()) {
             Arena arena = gamePlayer.getArena();
-            arena.getPlayers().keySet().forEach(player -> player.sendMessage(ColourUtil.colorize("&7"+player.getName()+" » &r")+event.getMessage()));
+            arena.getPlayers().keySet().forEach(player -> event.getRecipients().add(player));
         } else {
-            Bukkit.getOnlinePlayers().stream().filter(player -> !SlenderMain.getInstance().getGameManager().isInArena(player))
-                    .forEach(player -> player.sendMessage(ColourUtil.colorize("&7"+player.getName()+" » &r")+event.getMessage()));
+            Bukkit.getOnlinePlayers().stream().filter(player -> !SlenderMain.getInstance().getGameManager().isInArena(player)).forEach(player -> event.getRecipients().add(player));
         }
     }
 
@@ -71,5 +67,4 @@ public class PlayerListeners implements Listener {
             event.setCancelled(true);
         }
     }
-
 }

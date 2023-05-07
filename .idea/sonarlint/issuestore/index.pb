@@ -5,8 +5,6 @@ Msrc/main/java/me/dreamdevs/github/slender/api/events/SlenderGameEndEvent.java,
 Osrc/main/java/me/dreamdevs/github/slender/api/events/SlenderGameStartEvent.java,5\7\57c39af51c39fe19e1dd05614f9f75c8b544c9c1
 q
 Asrc/main/java/me/dreamdevs/github/slender/api/database/IData.java,a\a\aa7dc90b8720b386ae78554d5536c88ce8167db7
-n
->src/main/java/me/dreamdevs/github/slender/game/GamePlayer.java,0\4\04cf47013dea82401d83c91249e4e8f79d5cc3eb
 
 Osrc/main/java/me/dreamdevs/github/slender/api/events/SlenderJoinArenaEvent.java,3\3\3305b5bb60b04e271fea51b550eb5bea61ebeb72
 
@@ -15,16 +13,8 @@ Osrc/main/java/me/dreamdevs/github/slender/api/events/SlenderQuitArenaEvent.java
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 p
 @src/main/java/me/dreamdevs/github/slender/database/Database.java,d\5\d5150b1bbc5e2f174e47b531cb29f6b95a6ddb98
-v
-Fsrc/main/java/me/dreamdevs/github/slender/commands/CommandHandler.java,c\d\cd3a9f6f17937d4577971592c269070fa7ef789c
-…
-Usrc/main/java/me/dreamdevs/github/slender/commands/arguments/ArenaCreateArgument.java,2\d\2d6b04b5f6ee02861324250e7fa59d896a3611d7
 ‚
 Rsrc/main/java/me/dreamdevs/github/slender/commands/arguments/SetLobbyArgument.java,f\b\fbf97a6f914674b682aff00c052e14648e5f2e3f
-ƒ
-Ssrc/main/java/me/dreamdevs/github/slender/commands/arguments/ArenaEditArgument.java,f\4\f451912a31593c14eee467b844a2cab9a52bd185
-i
-9src/main/java/me/dreamdevs/github/slender/game/Lobby.java,1\c\1c34047b620a8427e5088241989a4bff11cd2139
 h
 8src/main/java/me/dreamdevs/github/slender/game/Role.java,4\a\4a6b818053ad6e201193bbcee1b36039d47c9a60
 n

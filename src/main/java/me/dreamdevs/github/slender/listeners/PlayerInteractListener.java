@@ -67,7 +67,7 @@ public class PlayerInteractListener implements Listener {
                 Menu menu = new Menu("My Profile", 3);
 
                 MenuItem menuItem = new MenuItem().material(Material.PAPER).name("&bYour Stats")
-                        .lore("&7Wins: &b"+gamePlayer.getWins(), "&7Exp: &b"+gamePlayer.getExp(), "&7Level: &b"+gamePlayer.getLevel(), "&7Collected Pages: &b"+gamePlayer.getCollectedPages()).build();
+                        .lore("&7Wins: &b"+gamePlayer.getWins(), "", "&7Exp: &b"+gamePlayer.getExp(), "&7Level: &b"+gamePlayer.getLevel(), "", "&7Collected Pages: &b"+gamePlayer.getCollectedPages(), "", "&7Killed Survivors: &b"+gamePlayer.getKilledSurvivors(), "&7Killed SlenderMen: &b"+gamePlayer.getKilledSlenderMen(), "&7Total kills: "+(gamePlayer.getKilledSurvivors()+gamePlayer.getKilledSlenderMen())).build();
 
                 menu.setItem(13, menuItem);
 
@@ -82,7 +82,7 @@ public class PlayerInteractListener implements Listener {
                                 || rArena.getArenaState() == ArenaState.STARTING)
                                 && !rArena.getPlayers().containsKey(player)).findFirst().orElse(null);
                 if(randomArena == null) {
-                    player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("no-availble-arenas"));
+                    player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("no-available-arenas"));
                     return;
                 }
                 SlenderMain.getInstance().getGameManager().leaveGame(gamePlayer.getPlayer(), arena);

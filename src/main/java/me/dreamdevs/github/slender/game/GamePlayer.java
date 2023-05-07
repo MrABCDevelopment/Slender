@@ -15,6 +15,8 @@ public class GamePlayer {
     private int collectedPages;
     private int level;
     private int exp;
+    private int killedSurvivors;
+    private int killedSlenderMen;
 
     public GamePlayer(Player player) {
         this.player = player;

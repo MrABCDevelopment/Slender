@@ -4,6 +4,9 @@ import lombok.Getter;
 import me.dreamdevs.github.slender.SlenderMain;
 import me.dreamdevs.github.slender.game.GamePlayer;
 import me.dreamdevs.github.slender.utils.CustomItem;
+import me.libraryaddict.disguise.DisguiseAPI;
+import me.libraryaddict.disguise.disguisetypes.DisguiseType;
+import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.attribute.Attribute;
@@ -64,6 +67,9 @@ public class PlayerManager {
                 player.showPlayer(SlenderMain.getInstance(), onlinePlayer);
             }
         });
+
+        if(SlenderMain.getInstance().isUseLibsDisguises())
+            DisguiseAPI.undisguiseToAll(player);
     }
 
     public void loadData(Player player) {
