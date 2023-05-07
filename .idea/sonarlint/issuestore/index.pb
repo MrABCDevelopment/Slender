@@ -17,5 +17,3 @@ p
 Rsrc/main/java/me/dreamdevs/github/slender/commands/arguments/SetLobbyArgument.java,f\b\fbf97a6f914674b682aff00c052e14648e5f2e3f
 h
 8src/main/java/me/dreamdevs/github/slender/game/Role.java,4\a\4a6b818053ad6e201193bbcee1b36039d47c9a60
-n
->src/main/java/me/dreamdevs/github/slender/menu/EditorMenu.java,d\b\db2cf07f0315336cb8d4cf2bc3ba60658115cc2d

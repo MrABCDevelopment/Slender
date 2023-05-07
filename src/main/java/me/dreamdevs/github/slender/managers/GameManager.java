@@ -37,12 +37,12 @@ public class GameManager {
 
         if(arena.getArenaState() == ArenaState.WAITING || arena.getArenaState() == ArenaState.STARTING) {
             if(arena.getPlayers().size() >= arena.getMaxPlayers()) {
-                player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("game-full"));
+                player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-no-slots"));
                 return;
             }
             GamePlayer gamePlayer = SlenderMain.getInstance().getPlayerManager().getPlayer(player);
             if(gamePlayer.isInArena()) {
-                player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("player-ingame"));
+                player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-player-in-game"));
                 return;
             }
 
@@ -62,6 +62,8 @@ public class GameManager {
                 playerGame.showPlayer(SlenderMain.getInstance(), player);
             });
 
+            player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-join-game-info"));
+
             SlenderJoinArenaEvent slenderJoinArenaEvent = new SlenderJoinArenaEvent(gamePlayer, arena);
             Bukkit.getPluginManager().callEvent(slenderJoinArenaEvent);
 
@@ -71,8 +73,7 @@ public class GameManager {
                 arena.setTimer(30);
             }
         } else {
-            player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("game-running"));
-            return;
+            player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-still-running"));
         }
     }
 

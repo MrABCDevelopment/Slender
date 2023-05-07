@@ -35,7 +35,7 @@ public class EditorMenu {
 
         MenuItem slenderLocation = new MenuItem().material(Material.REDSTONE_BLOCK).name("&bSet SlenderMan Spawn").lore("", "&7Click to set SlenderMan Spawn location").action(event -> {
             arena.setSlenderSpawnLocation(player.getLocation());
-            player.sendMessage(ColourUtil.colorize("&aYou set SlenderMan spawn location!"));
+            player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("slenderman-spawn-set-successfully"));
             player.closeInventory();
             new EditorMenu(player, arena);
         }).build();

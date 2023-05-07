@@ -19,3 +19,14 @@ items:
     Lore:
       - ''
       - '&eRight-click to &b&lPlay Again'
+  slenderman-sword:
+    DisplayName: "&cSlenderMan's Sword"
+    Lore:
+      - ''
+      - '&4Kill them all!'
+  survivor-sword:
+    DisplayName: "&bSurvivor's Sword"
+    Lore:
+      - ''
+      - '&7Use this sword to protect'
+      - '&7friends and yourself!'

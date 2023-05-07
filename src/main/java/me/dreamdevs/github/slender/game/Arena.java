@@ -85,7 +85,7 @@ public class Arena extends BukkitRunnable {
     public void run() {
         if(arenaState == ArenaState.WAITING) {
             if(players.isEmpty()) return;
-            sendTitleToAllPlayers("", "Waiting for players...", 0, 25, 25);
+            sendTitleToAllPlayers("", SlenderMain.getInstance().getMessagesManager().getMessage("arena-waiting-subtitle"), 0, 25, 25);
             return;
         }
 
@@ -195,13 +195,13 @@ public class Arena extends BukkitRunnable {
         this.bossBar.setTitle(ColourUtil.colorize("&cTeleport to lobby in "+timer+" seconds..."));
 
         if(getCollectedPages() < 8) {
-            sendTitleToAllPlayers("&c&lStop It Slender!", "&cSlenderMan won the game!", 10, 50, 10);
+            sendTitleToAllPlayers("&c&lStop It Slender!", SlenderMain.getInstance().getMessagesManager().getMessage("arena-slenderman-win-subtitle"), 10, 50, 10);
 
             GamePlayer gamePlayer = SlenderMain.getInstance().getPlayerManager().getPlayer(slenderMan);
             gamePlayer.setWins(gamePlayer.getWins()+1);
 
         } else {
-            sendTitleToAllPlayers("&c&lStop It Slender!", "&aSurvivors won the game!", 10, 50, 10);
+            sendTitleToAllPlayers("&c&lStop It Slender!", SlenderMain.getInstance().getMessagesManager().getMessage("arena-survivors-win-subtitle"), 10, 50, 10);
             getPlayers().entrySet().stream().filter(playerRoleEntry -> playerRoleEntry.getValue() == Role.SURVIVOR).forEach(playerRoleEntry -> {
                 GamePlayer gamePlayer = SlenderMain.getInstance().getPlayerManager().getPlayer(playerRoleEntry.getKey());
                 gamePlayer.setWins(gamePlayer.getWins()+1);

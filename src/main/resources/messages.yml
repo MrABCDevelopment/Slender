@@ -14,22 +14,31 @@ messages:
   arena-page-spawned-announcement: '&eThe page was spawned somewhere in the dark!'
   arena-spectator-mode: '&eYou are now spectator!'
 
+  arena-join-game-info: "&a&l❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚\n&r\n                    &f&lStop It Slender           \n&r\n\n    &e&lFind all pages or die by SlenderMan!
+                         \n   &e&lUse your torches to light up a little!\n&r\n&a&l❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚"
+
+  arena-waiting-subtitle: '&7Waiting for players...'
+  arena-starting-subtitle: '&aStarting in %TIME% seconds...'
+  arena-survivors-win-subtitle: "&aSurvivors won the game!"
+  arena-slenderman-win-subtitle: "&cSlenderMan won the game!"
+  arena-no-slots: '&cThis game is full!'
+  arena-still-running: '&cThis game is running!'
+  arena-player-in-game: '&cYou are already in game!'
+
+  arena-boss-bar-waiting: '&c&lStop It Slender'
+  arena-boss-bar-time-left: '&c'
+
   # Admin and console messages
   console-only-player: '&cConsole cannot performs this command.'
   lobby-set-successfully: '&aYou set the lobby!'
+  slenderman-spawn-set-successfully: '&aYou set SlenderMan spawn location!'
 
   no-available-arenas: '&cThere are no available arenas!'
   no-permission: '&cYou do not have permission to do this!'
   no-argument: '&cArgument does not exist!'
   no-arena: '&cThere is no map with this ID!'
 
-  # Player messages and titles
-  title-waiting-game: '&7Waiting for players... ({CURRENT}/{REQUIRE})'
-  title-starting-game: '&aStarting in {TIME} seconds...'
-  title-started-game: '&6&lGOOD LUCK!'
-  subtitle-started-game: '&aGame has started!'
-  title-won-player: '&a{WINNER} has won this game!'
-  game-full: '&cThis game is full!'
-  game-running: '&cThis game is running!'
-  player-ingame: '&cYou are already in game!'
-  no-arenas: '&cCould not find any arena!'
+  spectator-menu-title: 'Spectator Settings'
+  spectator-no-speed: '&cNo Speed'
+  spectator-speed-word: '&aSpeed'
+  spectator-random-player: '&aRandom Player'

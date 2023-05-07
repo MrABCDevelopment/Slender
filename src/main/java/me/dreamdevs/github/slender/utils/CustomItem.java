@@ -22,12 +22,12 @@ public enum CustomItem {
             SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.play-again.Lore")),
     SPECTATOR_TOOL(Material.STICK, "&bSpectator Menu", new ArrayList<>()),
 
-    SHOP_ITEM(Material.DIAMOND, "&3Shop", ColourUtil.colouredLore("", "&eRight-click to open &3Shop")),
-
-    SURVIVOR_WEAPON(Material.WOODEN_SWORD, "&bSurvivor's Sword", new ArrayList<>()),
+    SURVIVOR_WEAPON(Material.WOODEN_SWORD, SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getString("items.survivor-sword.DisplayName"),
+            SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.survivor-sword.Lore")),
 
     // SlenderMan's items
-    SLENDERMAN_WEAPON(Material.IRON_SWORD, "&cSlenderMan's Sword", new ArrayList<>());
+    SLENDERMAN_WEAPON(Material.IRON_SWORD, SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getString("items.slenderman-sword.DisplayName"),
+            SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.slenderman-sword.Lore"));
 
     private String displayName;
     private Material material;
