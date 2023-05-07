@@ -19,6 +19,11 @@ items:
     Lore:
       - ''
       - '&eRight-click to &b&lPlay Again'
+  spectator-settings:
+    DisplayName: "&bSpectator Settings"
+    Lore:
+      - ''
+      - '&eRight-click to open &bSpectator Settings'
   slenderman-sword:
     DisplayName: "&cSlenderMan's Sword"
     Lore:

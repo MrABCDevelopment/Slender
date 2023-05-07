@@ -20,7 +20,9 @@ public enum CustomItem {
             SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.profile.Lore")),
     PLAY_AGAIN(Material.PAPER, SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getString("items.play-again.DisplayName"),
             SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.play-again.Lore")),
-    SPECTATOR_TOOL(Material.STICK, "&bSpectator Menu", new ArrayList<>()),
+
+    SPECTATOR_TOOL(Material.STICK, SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getString("items.spectator-settings.DisplayName"),
+            SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.spectator-settings.Lore")),
 
     SURVIVOR_WEAPON(Material.WOODEN_SWORD, SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getString("items.survivor-sword.DisplayName"),
             SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.survivor-sword.Lore")),

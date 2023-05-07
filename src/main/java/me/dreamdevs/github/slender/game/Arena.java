@@ -64,7 +64,7 @@ public class Arena extends BukkitRunnable {
         this.players = new ConcurrentHashMap<>();
         this.survivorsLocations = new ArrayList<>();
         this.pagesLocations = new ArrayList<>();
-        this.bossBar = Bukkit.createBossBar(ColourUtil.colorize("&c&lStop It Slender!"), BarColor.RED, BarStyle.SOLID, BarFlag.DARKEN_SKY);
+        this.bossBar = Bukkit.createBossBar(SlenderMain.getInstance().getMessagesManager().getMessage("arena-boss-bar-waiting"), BarColor.RED, BarStyle.SOLID, BarFlag.DARKEN_SKY);
         this.slenderMan = null;
 
         this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
@@ -90,9 +90,9 @@ public class Arena extends BukkitRunnable {
         }
 
         if(arenaState == ArenaState.STARTING) {
-            sendTitleToAllPlayers("", "Starting in "+timer+" seconds...", 0, 25, 25);
+            sendTitleToAllPlayers("", SlenderMain.getInstance().getMessagesManager().getMessage("arena-starting-subtitle").replaceAll("%TIME%", String.valueOf(timer)), 0, 25, 25);
             if(timer == 0) {
-                this.bossBar.setTitle(ColourUtil.colorize("&cTime left: "+timer+" seconds..."));
+                this.bossBar.setTitle(ColourUtil.colorize(SlenderMain.getInstance().getMessagesManager().getMessage("arena-boss-bar-time-left").replaceAll("%TIME%", String.valueOf(timer))));
                 sendTitleToAllPlayers("&c&lStop It Slender!", "&4Good Luck!", 10, 30, 10);
                 sendPlayersToGame();
                 setArenaState(ArenaState.RUNNING);
@@ -106,7 +106,7 @@ public class Arena extends BukkitRunnable {
         }
 
         if(arenaState == ArenaState.RUNNING) {
-            this.bossBar.setTitle(ColourUtil.colorize("&cTime left: "+timer+" seconds..."));
+            this.bossBar.setTitle(SlenderMain.getInstance().getMessagesManager().getMessage("arena-boss-bar-time-left").replaceAll("%TIME%", String.valueOf(timer)));
             sendActionBar(SlenderMain.getInstance().getMessagesManager().getMessage("arena-collected-pages").replaceAll("%CURRENT%", Integer.toString(collectedPages)));
             if(timer == 0) {
                 endGame();
@@ -116,7 +116,7 @@ public class Arena extends BukkitRunnable {
         }
 
         if(arenaState == ArenaState.ENDING) {
-            this.bossBar.setTitle(ColourUtil.colorize("&cTeleport to lobby in "+timer+" seconds..."));
+            this.bossBar.setTitle(SlenderMain.getInstance().getMessagesManager().getMessage("arena-boss-bar-teleport-to-lobby").replaceAll("%TIME%", String.valueOf(timer)));
             if(timer == 0) {
                 restart();
                 return;
@@ -125,8 +125,8 @@ public class Arena extends BukkitRunnable {
         }
 
         if(arenaState == ArenaState.RESTARTING) {
-            Bukkit.getWorlds().forEach(world -> world.getEntities().stream().filter(Item.class::isInstance).forEach(entity -> entity.remove()));
-            this.bossBar.setTitle(ColourUtil.colorize("&c&lStop It Slender!"));
+            Bukkit.getWorlds().forEach(world -> world.getEntities().stream().filter(Item.class::isInstance).forEach(Entity::remove));
+            this.bossBar.setTitle(SlenderMain.getInstance().getMessagesManager().getMessage("arena-boss-bar-waiting"));
             this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
             this.scoreboard.registerNewObjective(id, "dummy", id);
 
@@ -179,7 +179,7 @@ public class Arena extends BukkitRunnable {
     }
 
     public void restart() {
-        Bukkit.getWorlds().forEach(world -> world.getEntities().stream().filter(Item.class::isInstance).forEach(entity -> entity.remove()));
+        Bukkit.getWorlds().forEach(world -> world.getEntities().stream().filter(Item.class::isInstance).forEach(Entity::remove));
 
         players.keySet().forEach(player -> {
             player.sendMessage(ColourUtil.colorize(SlenderMain.getInstance().getMessagesManager().getMessage("arena-game-stopped")));
@@ -192,7 +192,7 @@ public class Arena extends BukkitRunnable {
     }
 
     public void endGame() {
-        this.bossBar.setTitle(ColourUtil.colorize("&cTeleport to lobby in "+timer+" seconds..."));
+        this.bossBar.setTitle(SlenderMain.getInstance().getMessagesManager().getMessage("arena-boss-bar-teleport-to-lobby").replaceAll("%TIME%", String.valueOf(timer)));
 
         if(getCollectedPages() < 8) {
             sendTitleToAllPlayers("&c&lStop It Slender!", SlenderMain.getInstance().getMessagesManager().getMessage("arena-slenderman-win-subtitle"), 10, 50, 10);

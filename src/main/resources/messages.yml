@@ -26,19 +26,41 @@ messages:
   arena-player-in-game: '&cYou are already in game!'
 
   arena-boss-bar-waiting: '&c&lStop It Slender'
-  arena-boss-bar-time-left: '&c'
+  arena-boss-bar-time-left: '&cTime left: %TIME% seconds'
+  arena-boss-bar-teleport-to-lobby: '&cTeleport to lobby in %TIME% seconds'
 
   # Admin and console messages
   console-only-player: '&cConsole cannot performs this command.'
   lobby-set-successfully: '&aYou set the lobby!'
   slenderman-spawn-set-successfully: '&aYou set SlenderMan spawn location!'
+  survivors-spawn-add-successfully: '&aYou added Survivors spawn location!'
+  pages-spawn-add-successfully: '&aYou added pages spawn location!'
+  saved-arena-settings-successfully: '&aYou saved arena settings!'
 
-  no-available-arenas: '&cThere are no available arenas!'
+  no-available-arenas: '&cThere is no available arena!'
   no-permission: '&cYou do not have permission to do this!'
   no-argument: '&cArgument does not exist!'
   no-arena: '&cThere is no map with this ID!'
 
+  # Spectator menu
   spectator-menu-title: 'Spectator Settings'
   spectator-no-speed: '&cNo Speed'
   spectator-speed-word: '&aSpeed'
   spectator-random-player: '&aRandom Player'
+
+  # ArenaEditor menu
+  editor-menu-title: 'Map Editor'
+  editor-menu-minimum-players: '&bMinimum Players: %AMOUNT%'
+  editor-menu-minimum-players-lore: "\n&7Left-click to add 1\n&7Right-click to remove 1"
+  editor-menu-maximum-players: '&bMaximum Players: %AMOUNT%'
+  editor-menu-maximum-players-lore: "\n&7Left-click to add 1\n&7Right-click to remove 1"
+  editor-menu-set-slenderman-spawn: "&bSet SlenderMan Spawn"
+  editor-menu-set-slenderman-spawn-lore: "\n&7Click to set SlenderMan Spawn location"
+  editor-menu-game-time: '&bGame Time: %AMOUNT%'
+  editor-menu-game-time-lore: "\n&7Left-click to add 1\n&7Right-click to remove 1"
+  editor-menu-add-survivors-spawn: '&bAdd Survivors Spawn'
+  editor-menu-add-survivors-spawn-lore: "\n&7Click to add Survivors Spawn location"
+  editor-menu-add-pages-spawn: '&bAdd Pages Spawn'
+  editor-menu-add-pages-spawn-lore: "\n&7Click to add pages spawn location"
+  editor-menu-save-all: '&bSave Settings'
+  editor-menu-save-all-lore: "\n&7Click to save settings"

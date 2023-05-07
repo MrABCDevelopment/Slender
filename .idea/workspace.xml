@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6791b2f-39b1-4454-af7d-d867d1a193e2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/b/db2cf07f0315336cb8d4cf2bc3ba60658115cc2d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/game/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/game/Arena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/managers/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/managers/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/managers/PlayerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/managers/PlayerManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/menu/EditorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/menu/EditorMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/menu/SpectatorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/menu/SpectatorMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/utils/CustomItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/utils/CustomItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/items.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/items.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages.yml" afterDir="false" />
