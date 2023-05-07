@@ -9,8 +9,6 @@ Minecraft is a little different, here is quick explanation...</p>
 <p = align="center"><b>Stop It Slender</b> is a Minecraft MiniGame and recreation of popular game <b>Slender: The Arrival</b>. The rules are simple - you spawn on a map as a survivor or
 iconic SlenderMan. As a survivor you have to find all 8 pages with your teammates. As a SlenderMan you have to kill all survivors.</p>
 
-https://i.imgur.com/28ENz2B.png
-
 <h2 align="center"><b>Features</b></h2>
 <ul><li><b>Multiarena system</b></li>
 <p align="center">
