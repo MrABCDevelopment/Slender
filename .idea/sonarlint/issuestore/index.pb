@@ -29,16 +29,12 @@ Esrc/main/java/me/dreamdevs/github/slender/managers/ConfigManager.java,f\e\fe8a
 Osrc/main/java/me/dreamdevs/github/slender/listeners/PlayerInteractListener.java,b\7\b726b1b7acb9e3a2f9600afe1fb485ddd121f596
 l
 <src/main/java/me/dreamdevs/github/slender/api/menu/Menu.java,f\b\fb8fb27dd2a779c3aeafdc5ff7a62751f006286c
-n
->src/main/java/me/dreamdevs/github/slender/menu/EditorMenu.java,d\b\db2cf07f0315336cb8d4cf2bc3ba60658115cc2d
 q
 Asrc/main/java/me/dreamdevs/github/slender/menu/MyProfileMenu.java,1\8\18d766c22a8573fe39b1a59f8288b5e5e076a595
 t
 Dsrc/main/java/me/dreamdevs/github/slender/database/DatabaseYAML.java,b\a\bae794cb88687d5fb795364d774fd2bb3e979eab
 u
 Esrc/main/java/me/dreamdevs/github/slender/managers/PlayerManager.java,1\3\131e630835322d0994ae2ed95de15398827be1f3
-p
-@src/main/java/me/dreamdevs/github/slender/api/menu/MenuItem.java,e\a\ea85b5ce29c50c3ddf119284630f0961b38353d7
 p
 @src/main/java/me/dreamdevs/github/slender/database/Database.java,d\5\d5150b1bbc5e2f174e47b531cb29f6b95a6ddb98
 w

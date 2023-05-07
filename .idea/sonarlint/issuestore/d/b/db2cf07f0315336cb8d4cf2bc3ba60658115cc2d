@@ -1,9 +1,0 @@
-
-^
-java:S1192"IDefine a constant instead of duplicating this literal "%AMOUNT%" 3 times.(¥éö
-]
-java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(¥éö
-^
-java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(ùä™Ê
-]
-java:S5361*"HReplace this call to "replaceAll()" by a call to the "replace()" method.(•°õ#

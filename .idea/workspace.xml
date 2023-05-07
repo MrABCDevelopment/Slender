@@ -5,43 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6791b2f-39b1-4454-af7d-d867d1a193e2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/api/events/SlenderPlayerExpGainEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/api/events/SlenderPlayerLevelUpEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/menu/MyProfileMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/c/0c9e45555600dd83d3028ba58deae1406033506f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/f/0f5da4de727538b669b5100c50ca0a6fb8b895e1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/3/131e630835322d0994ae2ed95de15398827be1f3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/d/2d6b04b5f6ee02861324250e7fa59d896a3611d7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/a/4a6b818053ad6e201193bbcee1b36039d47c9a60" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/0/a062574fbc1092cf43493f87b02699f0af195556" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/a/aa7dc90b8720b386ae78554d5536c88ce8167db7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/2/d28717380eb03d93d2cce3db3826e168fb094110" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/5/d5150b1bbc5e2f174e47b531cb29f6b95a6ddb98" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/b/db2cf07f0315336cb8d4cf2bc3ba60658115cc2d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/b/fbf97a6f914674b682aff00c052e14648e5f2e3f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/e/fe8a745fed9426e4853203b72fecc33ab034cb69" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/SlenderMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/SlenderMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/api/menu/MenuItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/api/menu/MenuItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/commands/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/commands/CommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/commands/arguments/ArenaCreateArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/commands/arguments/ArenaCreateArgument.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/commands/arguments/ArenaDeleteArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/commands/arguments/ArenaDeleteArgument.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/commands/arguments/ArenaEditArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/commands/arguments/ArenaEditArgument.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/database/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/database/DatabaseYAML.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/database/DatabaseYAML.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/game/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/game/Arena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/game/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/game/Lobby.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/listeners/GameListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/listeners/GameListeners.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/listeners/PlayerInteractListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/listeners/PlayerInteractListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/listeners/PlayerListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/listeners/PlayerListeners.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/managers/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/managers/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/managers/PlayerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/managers/PlayerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/utils/ColourUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/utils/ColourUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/utils/CustomItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/utils/CustomItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/utils/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/utils/Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/menu/EditorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/menu/EditorMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
