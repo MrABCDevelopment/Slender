@@ -32,3 +32,11 @@ iconic SlenderMan. As a survivor you have to find all 8 pages with your teammate
 <p align="center">
   <img src="https://i.imgur.com/NfopRJ5.png"/>
 </p>
+
+<h2 align="center">How to setup?<b></h2>
+<p align="center">It's simple, easy and quick! Only you have to do is: <br>
+<b>1. Set lobby location using /stopitslender setlobby <br>
+2. Create an arena using /stopitslender arenacreate (id) <br>
+3. Setup your arena using /stopitslender arenaedit (id) <br>
+4. Save arena settings in Editor Menu <br>
+5. That's all! Pretty simple, right?</p>
