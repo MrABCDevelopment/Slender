@@ -17,8 +17,6 @@ Rsrc/main/java/me/dreamdevs/github/slender/commands/arguments/SetLobbyArgument.j
 Usrc/main/java/me/dreamdevs/github/slender/commands/arguments/ArenaDeleteArgument.java,0\c\0c9e45555600dd83d3028ba58deae1406033506f
 q
 Asrc/main/java/me/dreamdevs/github/slender/api/database/IData.java,a\a\aa7dc90b8720b386ae78554d5536c88ce8167db7
-v
-Fsrc/main/java/me/dreamdevs/github/slender/listeners/GameListeners.java,f\6\f6bf9974493e8776e7ed8d44d9923506a73b7ee8
 ƒ
 Ssrc/main/java/me/dreamdevs/github/slender/api/events/SlenderPlayerLevelUpEvent.java,e\9\e96ae975591029bb34c4f99ff63dba750b366f37
 ƒ

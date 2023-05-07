@@ -64,7 +64,7 @@ public class GameListeners implements Listener {
 
         if(arena.getPlayers().get(gamePlayer.getPlayer()) == Role.SURVIVOR) {
             GamePlayer slender = SlenderMain.getInstance().getPlayerManager().getPlayer(arena.getSlenderMan());
-            SlenderMain.getInstance().getPlayerManager().addExp(gamePlayer, 5);
+            SlenderMain.getInstance().getPlayerManager().addExp(slender, 5);
             slender.setKilledSurvivors(slender.getKilledSurvivors()+1);
 
             arena.getPlayers().put(gamePlayer.getPlayer(), Role.SPECTATOR);

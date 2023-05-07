@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6791b2f-39b1-4454-af7d-d867d1a193e2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/menu/EditorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/menu/EditorMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/listeners/GameListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dreamdevs/github/slender/listeners/GameListeners.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
