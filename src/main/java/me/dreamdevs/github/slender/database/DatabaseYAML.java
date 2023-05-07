@@ -34,6 +34,8 @@ public class DatabaseYAML implements IData {
         playerData.set("Statistics.CollectedPages", gamePlayer.getCollectedPages());
         playerData.set("Statistics.Level", gamePlayer.getLevel());
         playerData.set("Statistics.Exp", gamePlayer.getExp());
+        playerData.set("Statistics.KilledSurvivors", gamePlayer.getKilledSurvivors());
+        playerData.set("Statistics.KilledSlenderMen", gamePlayer.getKilledSlenderMen());
         try {
             playerData.save(playerFile);
         } catch (Exception e) {}
@@ -48,5 +50,7 @@ public class DatabaseYAML implements IData {
         gamePlayer.setLevel(playerData.getInt("Statistics.Level", 0));
         gamePlayer.setCollectedPages(playerData.getInt("Statistics.CollectedPages", 0));
         gamePlayer.setExp(playerData.getInt("Statistics.Exp", 0));
+        gamePlayer.setKilledSlenderMen(playerData.getInt("Statistics.KilledSlenderMen", 0));
+        gamePlayer.setKilledSurvivors(playerData.getInt("Statistics.KilledSurvivors", 0));
     }
 }

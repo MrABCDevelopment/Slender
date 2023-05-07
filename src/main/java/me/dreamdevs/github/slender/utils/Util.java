@@ -53,10 +53,6 @@ public class Util {
         Bukkit.getConsoleSender().sendMessage(ColourUtil.colorize(message));
     }
 
-    public static boolean chance(double chance) {
-        return Math.random() < chance;
-    }
-
     public static int getRandomNumber(int bound) {
         return random.nextInt(bound);
     }

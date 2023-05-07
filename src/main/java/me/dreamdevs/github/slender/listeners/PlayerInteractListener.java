@@ -6,6 +6,7 @@ import me.dreamdevs.github.slender.api.menu.MenuItem;
 import me.dreamdevs.github.slender.game.Arena;
 import me.dreamdevs.github.slender.game.ArenaState;
 import me.dreamdevs.github.slender.game.GamePlayer;
+import me.dreamdevs.github.slender.menu.MyProfileMenu;
 import me.dreamdevs.github.slender.menu.SpectatorMenu;
 import me.dreamdevs.github.slender.utils.CustomItem;
 import org.bukkit.Bukkit;
@@ -64,14 +65,7 @@ public class PlayerInteractListener implements Listener {
             if (itemStack.getItemMeta().getDisplayName().equals(CustomItem.MY_PROFILE.getDisplayName()) && itemStack.getItemMeta().getLore().equals(CustomItem.MY_PROFILE.getLore())) {
                 event.setCancelled(true);
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, (float) Math.random());
-                Menu menu = new Menu("My Profile", 3);
-
-                MenuItem menuItem = new MenuItem().material(Material.PAPER).name("&bYour Stats")
-                        .lore("&7Wins: &b"+gamePlayer.getWins(), "", "&7Exp: &b"+gamePlayer.getExp(), "&7Level: &b"+gamePlayer.getLevel(), "", "&7Collected Pages: &b"+gamePlayer.getCollectedPages(), "", "&7Killed Survivors: &b"+gamePlayer.getKilledSurvivors(), "&7Killed SlenderMen: &b"+gamePlayer.getKilledSlenderMen(), "&7Total kills: "+(gamePlayer.getKilledSurvivors()+gamePlayer.getKilledSlenderMen())).build();
-
-                menu.setItem(13, menuItem);
-
-                menu.open(player);
+                new MyProfileMenu(player);
             }
 
             if (itemStack.getItemMeta().getDisplayName().equals(CustomItem.PLAY_AGAIN.getDisplayName()) && itemStack.getItemMeta().getLore().equals(CustomItem.PLAY_AGAIN.getLore())) {

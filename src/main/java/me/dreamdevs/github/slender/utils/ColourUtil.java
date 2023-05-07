@@ -33,4 +33,12 @@ public class ColourUtil {
         return (lore != null) ? lore.stream().filter(Objects::nonNull).map(ColourUtil::colorize).collect(Collectors.toList()) : new ArrayList<>();
     }
 
+    public static List<String> colouredLore(String lore) {
+        List<String> list = new ArrayList<>();
+        String[] strings = lore.split("\n");
+        for(String s : strings)
+            list.add(colorize(s));
+        return list;
+    }
+
 }

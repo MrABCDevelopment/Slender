@@ -34,7 +34,6 @@ public class GameManager {
     }
 
     public void joinGame(Player player, Arena arena) {
-
         if(arena.getArenaState() == ArenaState.WAITING || arena.getArenaState() == ArenaState.STARTING) {
             if(arena.getPlayers().size() >= arena.getMaxPlayers()) {
                 player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-no-slots"));
@@ -173,11 +172,6 @@ public class GameManager {
             arena.endGame();
         }
         return true;
-    }
-
-    public void forceRemovePlayer(Player player) {
-        arenas.stream().filter(arena -> arena.getPlayers().containsKey(player)).forEach(arena -> arena.getPlayers().remove(player));
-        //Util.sendPluginMessage("&cPlayer "+player.getName()+" was removed from the game, because he left.");
     }
 
 }

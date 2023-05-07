@@ -2,6 +2,8 @@ package me.dreamdevs.github.slender.managers;
 
 import lombok.Getter;
 import me.dreamdevs.github.slender.SlenderMain;
+import me.dreamdevs.github.slender.api.events.SlenderPlayerExpGainEvent;
+import me.dreamdevs.github.slender.api.events.SlenderPlayerLevelUpEvent;
 import me.dreamdevs.github.slender.game.GamePlayer;
 import me.dreamdevs.github.slender.utils.CustomItem;
 import me.libraryaddict.disguise.DisguiseAPI;
@@ -68,6 +70,20 @@ public class PlayerManager {
 
         if(SlenderMain.getInstance().isUseLibsDisguises())
             DisguiseAPI.undisguiseToAll(player);
+    }
+
+    public void addExp(GamePlayer gamePlayer, int exp) {
+        gamePlayer.setExp(gamePlayer.getExp()+exp);
+        gamePlayer.getPlayer().sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("player-reward-exp").replaceAll("%AMOUNT%", String.valueOf(exp)));
+        SlenderPlayerExpGainEvent slenderPlayerExpGainEvent = new SlenderPlayerExpGainEvent(gamePlayer, exp);
+        Bukkit.getServer().getPluginManager().callEvent(slenderPlayerExpGainEvent);
+        if(gamePlayer.getExp() >= gamePlayer.getLevel()*50) {
+            int newLevel = gamePlayer.getLevel()+1;
+            gamePlayer.setLevel(newLevel);
+            gamePlayer.getPlayer().sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("player-level-up").replaceAll("%LEVEL%", String.valueOf(newLevel)));
+            SlenderPlayerLevelUpEvent slenderPlayerLevelUpEvent = new SlenderPlayerLevelUpEvent(gamePlayer, newLevel);
+            Bukkit.getServer().getPluginManager().callEvent(slenderPlayerLevelUpEvent);
+        }
     }
 
     public void loadData(Player player) {

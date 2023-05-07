@@ -14,6 +14,7 @@ import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
@@ -161,6 +162,8 @@ public class Arena extends BukkitRunnable {
         });
 
         slenderMan.teleport(slenderSpawnLocation);
+        slenderMan.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(40);
+        slenderMan.setHealth(40);
         slenderMan.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, Integer.MAX_VALUE));
         if(SlenderMain.getInstance().isUseLibsDisguises()) {
             DisguiseAPI.disguiseToAll(slenderMan, new MobDisguise(DisguiseType.ENDERMAN));

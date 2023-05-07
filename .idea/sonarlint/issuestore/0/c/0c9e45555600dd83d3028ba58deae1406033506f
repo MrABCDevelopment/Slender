@@ -1,3 +1,6 @@
 
-^
-java:S2094"BRemove this empty class, write its code or make it an "interface".(Ûù%8ÇÆ¹ÿ0
+O
+java:S3516"9Refactor this method to not always return the same value.(ÆÙşÖ
+U	java:S899";Do something with the "boolean" value returned by "delete".(ôš‚úıÿÿÿÿ
+i
+java:S4042"NUse "java.nio.file.Files#delete" here for better messages on error conditions.(ôš‚úıÿÿÿÿ

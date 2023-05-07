@@ -26,7 +26,7 @@ public class ArenaCreateArgument implements ArgumentCommand {
 
     @Override
     public String getHelpText() {
-        return "&a/stopitslender arenacreate <id> - creates an arena with specific ID";
+        return "&c/stopitslender arenacreate <id> - creates an arena with specific ID";
     }
 
     @Override

@@ -36,7 +36,7 @@ public class ArenaEditArgument implements ArgumentCommand {
 
     @Override
     public String getHelpText() {
-        return "&a/stopitslender editarena <id> - edits an arena with specific ID";
+        return "&c/stopitslender editarena <id> - edits an arena with specific ID";
     }
 
     @Override

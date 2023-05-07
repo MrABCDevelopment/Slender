@@ -5,9 +5,9 @@ import me.dreamdevs.github.slender.game.Arena;
 import me.dreamdevs.github.slender.game.ArenaState;
 import me.dreamdevs.github.slender.game.GamePlayer;
 import me.dreamdevs.github.slender.game.Role;
-import me.dreamdevs.github.slender.utils.ColourUtil;
 import me.dreamdevs.github.slender.utils.CustomItem;
 import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -64,9 +64,8 @@ public class GameListeners implements Listener {
 
         if(arena.getPlayers().get(gamePlayer.getPlayer()) == Role.SURVIVOR) {
             GamePlayer slender = SlenderMain.getInstance().getPlayerManager().getPlayer(arena.getSlenderMan());
-            slender.setExp(slender.getExp()+5);
+            SlenderMain.getInstance().getPlayerManager().addExp(gamePlayer, 5);
             slender.setKilledSurvivors(slender.getKilledSurvivors()+1);
-            arena.getSlenderMan().sendMessage(ColourUtil.colorize("&a+5 Exp"));
 
             arena.getPlayers().put(gamePlayer.getPlayer(), Role.SPECTATOR);
             if(arena.getSurvivorsAmount() == 0) {
@@ -86,6 +85,7 @@ public class GameListeners implements Listener {
             arena.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-slenderman-killed"));
             GamePlayer killer = SlenderMain.getInstance().getPlayerManager().getPlayer(gamePlayer.getPlayer().getKiller());
             killer.setKilledSlenderMen(killer.getKilledSlenderMen()+1);
+            SlenderMain.getInstance().getPlayerManager().addExp(killer, 10);
             Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> gamePlayer.getPlayer().spigot().respawn(), 4L);
         }
     }
@@ -109,6 +109,8 @@ public class GameListeners implements Listener {
             event.setRespawnLocation(gamePlayer.getArena().getSlenderSpawnLocation());
             event.getPlayer().getInventory().clear();
             event.getPlayer().getInventory().setItem(0, CustomItem.SLENDERMAN_WEAPON.toItemStack());
+            event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(40);
+            event.getPlayer().setHealth(40);
             Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, Integer.MAX_VALUE)), 2L);
         }
     }
@@ -126,8 +128,7 @@ public class GameListeners implements Listener {
         event.getItem().remove();
         arena.setCollectedPages(arena.getCollectedPages()+1);
         gamePlayer.setCollectedPages(gamePlayer.getCollectedPages()+1);
-        gamePlayer.getPlayer().sendMessage(ColourUtil.colorize("&a+5 Exp"));
-        gamePlayer.setExp(gamePlayer.getExp()+5);
+        SlenderMain.getInstance().getPlayerManager().addExp(gamePlayer, 5);
         if(arena.getCollectedPages() == 8) {
             arena.endGame();
             return;

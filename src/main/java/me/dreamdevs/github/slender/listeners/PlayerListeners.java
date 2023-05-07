@@ -4,7 +4,6 @@ import me.dreamdevs.github.slender.SlenderMain;
 import me.dreamdevs.github.slender.game.Arena;
 import me.dreamdevs.github.slender.game.GamePlayer;
 import me.dreamdevs.github.slender.game.Role;
-import me.dreamdevs.github.slender.utils.ColourUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;

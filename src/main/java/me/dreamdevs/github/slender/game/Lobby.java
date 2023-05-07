@@ -39,7 +39,7 @@ public class Lobby {
     public void saveLobby(Player player) {
         lobbyLocation = player.getLocation().clone();
         try {
-            configuration.set("lobby.location", Util.getLocationString(lobbyLocation, true));
+            configuration.set("lobby.location", Util.getLocationString(player.getLocation(), true));
             configuration.save(lobbyFile);
         } catch (IOException e) {
             Util.sendPluginMessage("&cSomething went wrong, could not save lobby location!");

@@ -30,9 +30,8 @@ public class Database {
     }
 
     public void autoSaveData() {
-        for(GamePlayer gamePlayer : SlenderMain.getInstance().getPlayerManager().getPlayers()) {
-            Bukkit.getScheduler().runTaskTimerAsynchronously(SlenderMain.getInstance(), () -> saveData(gamePlayer), 0L, 20L * 300);
-        }
+        Bukkit.getScheduler().runTaskTimerAsynchronously(SlenderMain.getInstance(), () -> SlenderMain.getInstance().getPlayerManager().getPlayers().forEach(this::saveData), 0L, 20*300L);
+        Util.sendPluginMessage("&aData saved!");
     }
 
     public void saveData(GamePlayer gamePlayer) {

@@ -61,6 +61,8 @@ public class SlenderMain extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(), this);
         getServer().getPluginManager().registerEvents(new InventoryListener(), this);
         getServer().getPluginManager().registerEvents(new GameListeners(), this);
+
+        this.database.autoSaveData();
     }
 
     @Override

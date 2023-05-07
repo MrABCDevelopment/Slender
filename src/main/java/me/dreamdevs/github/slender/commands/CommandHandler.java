@@ -3,6 +3,7 @@ package me.dreamdevs.github.slender.commands;
 import lombok.Getter;
 import me.dreamdevs.github.slender.SlenderMain;
 import me.dreamdevs.github.slender.commands.arguments.ArenaCreateArgument;
+import me.dreamdevs.github.slender.commands.arguments.ArenaDeleteArgument;
 import me.dreamdevs.github.slender.commands.arguments.ArenaEditArgument;
 import me.dreamdevs.github.slender.commands.arguments.SetLobbyArgument;
 import me.dreamdevs.github.slender.utils.ColourUtil;
@@ -25,6 +26,7 @@ public class CommandHandler implements TabExecutor {
         registerCommand("setlobby", SetLobbyArgument.class);
         registerCommand("createarena", ArenaCreateArgument.class);
         registerCommand("editarena", ArenaEditArgument.class);
+        registerCommand("deletearena", ArenaDeleteArgument.class);
         plugin.getCommand("stopitslender").setExecutor(this);
         plugin.getCommand("stopitslender").setTabCompleter(this);
     }

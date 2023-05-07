@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuItem {
@@ -29,6 +30,11 @@ public class MenuItem {
     }
 
     public MenuItem lore(String... lore) {
+        this.lore = ColourUtil.colouredLore(lore);
+        return this;
+    }
+
+    public MenuItem lore(List<String> lore) {
         this.lore = ColourUtil.colouredLore(lore);
         return this;
     }
