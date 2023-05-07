@@ -12,17 +12,17 @@ iconic SlenderMan. As a survivor you have to find all 8 pages with your teammate
 <h2 align="center"><b>Features</b></h2>
 <ul><li><b>Multiarena system</b></li>
 <p align="center">
-  <img src="https://i.imgur.com/28ENz2B.png"/>
+  <img src="https://i.imgur.com/QF5xxAh.png"/>
 </p>
 <li><b>Statistics and levels system</b></li>
 <p align="center">
-  <img src="https://i.imgur.com/Z98VZsB.png"/>
+  <img src="https://i.imgur.com/VXNw9JA.png"/>
   <img src="https://i.imgur.com/dlRBRuM.png">
 </p>
 <li><b>Most messages are configurable in messages.yml</b></li>
 <li><b>Friendly and easy to play</b></li>
 <p align="center">
-  <img src="https://i.imgur.com/Ibcqy0j.png"/>
+  <img src="https://i.imgur.com/MZK7j7a.png"/>
 </p>
 <li><b>Support for LibsDiguises and ProtocolLib</b></li>
 <p align="center">
@@ -30,7 +30,9 @@ iconic SlenderMan. As a survivor you have to find all 8 pages with your teammate
 </p>
 <li><b>Spectator mode</b></li>
 <p align="center">
-  <img src="https://i.imgur.com/NfopRJ5.png"/>
+  <img src="https://i.imgur.com/oqkBg42.png"/>
+  <img src="https://i.imgur.com/qVkd2wj.png"/> 
+  <img src="https://i.imgur.com/8cBBA0R.png"/>
 </p>
 
 <h2 align="center">How to setup?<b></h2>
