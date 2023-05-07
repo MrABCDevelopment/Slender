@@ -8,6 +8,7 @@ import me.dreamdevs.github.slender.game.ArenaState;
 import me.dreamdevs.github.slender.game.GamePlayer;
 import me.dreamdevs.github.slender.menu.SpectatorMenu;
 import me.dreamdevs.github.slender.utils.CustomItem;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -20,6 +21,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class PlayerInteractListener implements Listener {
 
@@ -55,7 +58,7 @@ public class PlayerInteractListener implements Listener {
             if (itemStack.getItemMeta().getDisplayName().equals(CustomItem.LEAVE.getDisplayName()) && itemStack.getItemMeta().getLore().equals(CustomItem.LEAVE.getLore())) {
                 event.setCancelled(true);
                 Arena arena = gamePlayer.getArena();
-                SlenderMain.getInstance().getGameManager().leaveGame(player, arena);
+                SlenderMain.getInstance().getGameManager().leaveGame(gamePlayer.getPlayer(), arena);
             }
 
             if (itemStack.getItemMeta().getDisplayName().equals(CustomItem.MY_PROFILE.getDisplayName()) && itemStack.getItemMeta().getLore().equals(CustomItem.MY_PROFILE.getLore())) {
@@ -82,7 +85,7 @@ public class PlayerInteractListener implements Listener {
                     player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("no-availble-arenas"));
                     return;
                 }
-                SlenderMain.getInstance().getGameManager().leaveGame(player, arena);
+                SlenderMain.getInstance().getGameManager().leaveGame(gamePlayer.getPlayer(), arena);
                 SlenderMain.getInstance().getGameManager().joinGame(player, randomArena);
             }
 
@@ -90,6 +93,19 @@ public class PlayerInteractListener implements Listener {
                 event.setCancelled(true);
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, (float) Math.random());
                 new SpectatorMenu(player);
+            }
+
+            if(event.getItem().getType() == Material.TORCH) {
+                if(!gamePlayer.isInArena())
+                    return;
+                gamePlayer.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
+                gamePlayer.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 40, 0));
+                ItemStack itemStack1 = gamePlayer.getPlayer().getInventory().getItemInMainHand();
+                gamePlayer.getPlayer().getInventory().getItemInMainHand().setAmount(itemStack1.getAmount()-1);
+                Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> {
+                    gamePlayer.getPlayer().removePotionEffect(PotionEffectType.NIGHT_VISION);
+                    gamePlayer.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, Integer.MAX_VALUE));
+                }, 40L);
             }
         }
     }

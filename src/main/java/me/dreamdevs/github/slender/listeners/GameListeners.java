@@ -2,7 +2,6 @@ package me.dreamdevs.github.slender.listeners;
 
 import me.dreamdevs.github.slender.SlenderMain;
 import me.dreamdevs.github.slender.game.Arena;
-import me.dreamdevs.github.slender.game.ArenaState;
 import me.dreamdevs.github.slender.game.GamePlayer;
 import me.dreamdevs.github.slender.game.Role;
 import me.dreamdevs.github.slender.utils.ColourUtil;
@@ -12,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -40,14 +38,13 @@ public class GameListeners implements Listener {
         }
 
         Arena arena = attackerPlayer.getArena();
-        if(arena.getPlayers().get(damager) == Role.SPECTATOR) {
+        if(arena.getPlayers().get(damager) == Role.SPECTATOR || arena.getPlayers().get(damager) == Role.NONE) {
             event.setCancelled(true);
             return;
         }
 
         if(arena.getPlayers().get(damager) == Role.SURVIVOR && arena.getPlayers().get(entity) == Role.SURVIVOR) {
             event.setCancelled(true);
-            return;
         }
      }
 
@@ -69,13 +66,18 @@ public class GameListeners implements Listener {
             slender.setExp(slender.getExp()+5);
             arena.getSlenderMan().sendMessage(ColourUtil.colorize("&a+5 Exp"));
 
+            arena.getPlayers().put(gamePlayer.getPlayer(), Role.SPECTATOR);
+            if(arena.getSurvivorsAmount() == 0) {
+                arena.endGame();
+            }
+
             event.getEntity().getLocation().getWorld().strikeLightningEffect(event.getEntity().getLocation());
             arena.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-killed-by-slenderman").replaceAll("%PLAYER%", gamePlayer.getPlayer().getName()));
             Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> {
                 gamePlayer.getPlayer().spigot().respawn();
-                arena.getPlayers().put(gamePlayer.getPlayer(), Role.SPECTATOR);
                 gamePlayer.getPlayer().sendMessage(ColourUtil.colorize("&eYou are now spectator!"));
             }, 4L);
+
         }
 
         if(arena.getPlayers().get(gamePlayer.getPlayer()) == Role.SLENDER) {
@@ -119,12 +121,11 @@ public class GameListeners implements Listener {
 
         event.getItem().remove();
         arena.setCollectedPages(arena.getCollectedPages()+1);
+        gamePlayer.setCollectedPages(gamePlayer.getCollectedPages()+1);
+        gamePlayer.getPlayer().sendMessage(ColourUtil.colorize("&a+5 Exp"));
+        gamePlayer.setExp(gamePlayer.getExp()+5);
         if(arena.getCollectedPages() == 8) {
-            arena.setArenaState(ArenaState.ENDING);
-            arena.getPlayers().keySet().forEach(player -> {
-                player.getInventory().setItem(7, CustomItem.PLAY_AGAIN.toItemStack());
-                player.getInventory().setItem(8, CustomItem.LEAVE.toItemStack());
-            });
+            arena.endGame();
             return;
         }
         arena.spawnPage();

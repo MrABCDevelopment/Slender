@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @Getter @Setter
 public class Arena extends BukkitRunnable {
@@ -105,38 +106,23 @@ public class Arena extends BukkitRunnable {
             this.bossBar.setTitle(ColourUtil.colorize("&cTime left: "+timer+" seconds..."));
             sendActionBar(SlenderMain.getInstance().getMessagesManager().getMessage("arena-collected-pages").replaceAll("%CURRENT%", Integer.toString(collectedPages)));
             if(timer == 0) {
-                if(getCollectedPages() < 8) {
-                    sendTitleToAllPlayers("&c&lStop It Slender!", "&cSlenderMan won the game!", 10, 50, 10);
-
-                    GamePlayer gamePlayer = SlenderMain.getInstance().getPlayerManager().getPlayer(slenderMan);
-                    gamePlayer.setWins(gamePlayer.getWins()+1);
-
-                } else {
-                    sendTitleToAllPlayers("&c&lStop It Slender!", "&aSurvivors won the game!", 10, 50, 10);
-                    getPlayers().entrySet().stream().filter(playerRoleEntry -> playerRoleEntry.getValue() == Role.SURVIVOR).forEach(playerRoleEntry -> {
-                        GamePlayer gamePlayer = SlenderMain.getInstance().getPlayerManager().getPlayer(playerRoleEntry.getKey());
-                        gamePlayer.setWins(gamePlayer.getWins()+1);
-                    });
-                }
-
-                setArenaState(ArenaState.ENDING);
-                setTimer(15);
-                SlenderGameEndEvent slenderGameEndEvent = new SlenderGameEndEvent(this);
-                Bukkit.getPluginManager().callEvent(slenderGameEndEvent);
+                endGame();
                 return;
             }
             timer--;
         }
 
         if(arenaState == ArenaState.ENDING) {
+            this.bossBar.setTitle(ColourUtil.colorize("&cTeleport to lobby in "+timer+" seconds..."));
             if(timer == 0) {
                 restart();
+                return;
             }
             timer--;
         }
 
         if(arenaState == ArenaState.RESTARTING) {
-            Bukkit.getWorlds().forEach(world -> world.getEntities().stream().filter(entity -> entity instanceof Item).forEach(entity -> entity.remove()));
+            Bukkit.getWorlds().forEach(world -> world.getEntities().stream().filter(Item.class::isInstance).forEach(entity -> entity.remove()));
             this.bossBar.setTitle(ColourUtil.colorize("&c&lStop It Slender!"));
             this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
             this.scoreboard.registerNewObjective(id, "dummy", id);
@@ -167,6 +153,8 @@ public class Arena extends BukkitRunnable {
             player.getScoreboard().getTeam("survivors").addPlayer(player);
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, Integer.MAX_VALUE));
             player.getInventory().clear();
+            player.getInventory().setItem(0, CustomItem.SURVIVOR_WEAPON.toItemStack());
+            player.getInventory().setItem(1, new ItemStack(Material.TORCH, 3));
         });
 
         slenderMan.teleport(slenderSpawnLocation);
@@ -182,6 +170,8 @@ public class Arena extends BukkitRunnable {
     }
 
     public void restart() {
+        Bukkit.getWorlds().forEach(world -> world.getEntities().stream().filter(Item.class::isInstance).forEach(entity -> entity.remove()));
+
         players.keySet().forEach(player -> {
             player.sendMessage(ColourUtil.colorize(SlenderMain.getInstance().getMessagesManager().getMessage("arena-game-stopped")));
             SlenderMain.getInstance().getGameManager().leaveGame(player, this);
@@ -192,6 +182,35 @@ public class Arena extends BukkitRunnable {
         setCollectedPages(0);
     }
 
+    public void endGame() {
+        this.bossBar.setTitle(ColourUtil.colorize("&cTeleport to lobby in "+timer+" seconds..."));
+        if(getCollectedPages() < 8) {
+            sendTitleToAllPlayers("&c&lStop It Slender!", "&cSlenderMan won the game!", 10, 50, 10);
+
+            GamePlayer gamePlayer = SlenderMain.getInstance().getPlayerManager().getPlayer(slenderMan);
+            gamePlayer.setWins(gamePlayer.getWins()+1);
+
+        } else {
+            sendTitleToAllPlayers("&c&lStop It Slender!", "&aSurvivors won the game!", 10, 50, 10);
+            getPlayers().entrySet().stream().filter(playerRoleEntry -> playerRoleEntry.getValue() == Role.SURVIVOR).forEach(playerRoleEntry -> {
+                GamePlayer gamePlayer = SlenderMain.getInstance().getPlayerManager().getPlayer(playerRoleEntry.getKey());
+                gamePlayer.setWins(gamePlayer.getWins()+1);
+            });
+        }
+
+        getPlayers().keySet().forEach(player -> {
+            player.getInventory().clear();
+            player.getActivePotionEffects().stream().map(PotionEffect::getType).forEach(player::removePotionEffect);
+            player.getInventory().setItem(7, CustomItem.PLAY_AGAIN.toItemStack());
+            player.getInventory().setItem(8, CustomItem.LEAVE.toItemStack());
+        });
+
+        setArenaState(ArenaState.ENDING);
+        setTimer(15);
+        SlenderGameEndEvent slenderGameEndEvent = new SlenderGameEndEvent(this);
+        Bukkit.getPluginManager().callEvent(slenderGameEndEvent);
+    }
+
     public void spawnPage() {
         ItemStack itemStack = new ItemStack(Material.PAPER);
 
@@ -200,6 +219,10 @@ public class Arena extends BukkitRunnable {
         item.setCustomNameVisible(true);
 
         sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-page-spawned-announcement"));
+    }
+
+    public int getSurvivorsAmount() {
+        return players.entrySet().stream().filter(playerRoleEntry -> playerRoleEntry.getValue() == Role.SURVIVOR).collect(Collectors.toList()).size();
     }
 
     public void sendMessage(String message) {

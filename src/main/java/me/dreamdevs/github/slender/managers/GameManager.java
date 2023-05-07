@@ -34,63 +34,65 @@ public class GameManager {
     }
 
     public void joinGame(Player player, Arena arena) {
-        //if(arena.getArenaState() != ArenaState.WAITING || arena.getArenaState() != ArenaState.STARTING) {
-        //    player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("game-running"));
-        //    return;
-        //}
-        if(arena.getPlayers().size() >= arena.getMaxPlayers()) {
-            player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("game-full"));
+
+        if(arena.getArenaState() == ArenaState.WAITING || arena.getArenaState() == ArenaState.STARTING) {
+            if(arena.getPlayers().size() >= arena.getMaxPlayers()) {
+                player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("game-full"));
+                return;
+            }
+            GamePlayer gamePlayer = SlenderMain.getInstance().getPlayerManager().getPlayer(player);
+            if(gamePlayer.isInArena()) {
+                player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("player-ingame"));
+                return;
+            }
+
+            player.teleport(arena.getSlenderSpawnLocation());
+            gamePlayer.clearInventory();
+            player.setScoreboard(arena.getScoreboard());
+            player.getInventory().setItem(8, CustomItem.LEAVE.toItemStack());
+            arena.getPlayers().put(player, Role.NONE);
+            arena.getBossBar().addPlayer(player);
+            Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
+                player.hidePlayer(SlenderMain.getInstance(), onlinePlayer);
+                onlinePlayer.hidePlayer(SlenderMain.getInstance(), player);
+            });
+
+            arena.getPlayers().keySet().forEach(playerGame -> {
+                player.showPlayer(SlenderMain.getInstance(), playerGame);
+                playerGame.showPlayer(SlenderMain.getInstance(), player);
+            });
+
+            SlenderJoinArenaEvent slenderJoinArenaEvent = new SlenderJoinArenaEvent(gamePlayer, arena);
+            Bukkit.getPluginManager().callEvent(slenderJoinArenaEvent);
+
+            if(arena.getPlayers().size() >= arena.getMinPlayers()) {
+                arena.setArenaState(ArenaState.STARTING);
+                arena.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-starting-info"));
+                arena.setTimer(30);
+            }
+        } else {
+            player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("game-running"));
             return;
-        }
-        GamePlayer gamePlayer = SlenderMain.getInstance().getPlayerManager().getPlayer(player);
-        if(gamePlayer.isInArena()) {
-            player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("player-ingame"));
-            return;
-        }
-        player.teleport(arena.getSlenderSpawnLocation());
-        gamePlayer.clearInventory();
-        player.setScoreboard(arena.getScoreboard());
-        player.getInventory().setItem(8, CustomItem.LEAVE.toItemStack());
-        arena.getPlayers().put(player, Role.NONE);
-        arena.getBossBar().addPlayer(player);
-        Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
-            player.hidePlayer(SlenderMain.getInstance(), onlinePlayer);
-            onlinePlayer.hidePlayer(SlenderMain.getInstance(), player);
-        });
-
-        arena.getPlayers().keySet().forEach(playerGame -> {
-            player.showPlayer(SlenderMain.getInstance(), playerGame);
-            playerGame.showPlayer(SlenderMain.getInstance(), player);
-        });
-
-        SlenderJoinArenaEvent slenderJoinArenaEvent = new SlenderJoinArenaEvent(gamePlayer, arena);
-        Bukkit.getPluginManager().callEvent(slenderJoinArenaEvent);
-
-        if(arena.getPlayers().size() >= arena.getMinPlayers()) {
-            arena.setArenaState(ArenaState.STARTING);
-            arena.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-starting-info"));
-            arena.setTimer(30);
         }
     }
 
     public void leaveGame(Player player, Arena arena) {
         GamePlayer gamePlayer = SlenderMain.getInstance().getPlayerManager().getPlayer(player);
-        if(!gamePlayer.isInArena()) {
-            player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("not-ingame"));
+
+        if(!forceRemovePlayerFromGame(gamePlayer)) {
+            gamePlayer.getPlayer().sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("not-ingame"));
             return;
         }
-        SlenderMain.getInstance().getPlayerManager().sendToLobby(player);
-        SlenderMain.getInstance().getPlayerManager().loadLobby(player);
-        arena.getPlayers().remove(player);
-        arena.getBossBar().removePlayer(player);
 
         SlenderQuitArenaEvent slenderQuitArenaEvent = new SlenderQuitArenaEvent(gamePlayer, arena);
         Bukkit.getPluginManager().callEvent(slenderQuitArenaEvent);
 
         if(arena.getPlayers().size() < arena.getMinPlayers()) {
-            arena.setArenaState(ArenaState.WAITING);
-            arena.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-stop-starting"));
-            arena.setTimer(0);
+            if(arena.getArenaState() == ArenaState.STARTING) {
+                arena.setArenaState(ArenaState.WAITING);
+                arena.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-stop-starting"));
+                arena.setTimer(0);
+            }
         }
     }
 
@@ -156,9 +158,25 @@ public class GameManager {
         Optional.ofNullable(arenas).ifPresent(games1 -> games1.forEach(this::saveGame));
     }
 
+    public boolean forceRemovePlayerFromGame(GamePlayer gamePlayer) {
+        if(!gamePlayer.isInArena()) {
+            Util.sendPluginMessage("&cCould not remove player from the game!");
+            return false;
+        }
+        Arena arena = gamePlayer.getArena();
+        SlenderMain.getInstance().getPlayerManager().sendToLobby(gamePlayer.getPlayer());
+        SlenderMain.getInstance().getPlayerManager().loadLobby(gamePlayer.getPlayer());
+        arena.getPlayers().remove(gamePlayer.getPlayer());
+        arena.getBossBar().removePlayer(gamePlayer.getPlayer());
+        if(arena.getPlayers().size() == 0 && arena.getArenaState() == ArenaState.RUNNING) {
+            arena.endGame();
+        }
+        return true;
+    }
+
     public void forceRemovePlayer(Player player) {
         arenas.stream().filter(arena -> arena.getPlayers().containsKey(player)).forEach(arena -> arena.getPlayers().remove(player));
-        Util.sendPluginMessage("&cPlayer "+player.getName()+" was removed from the game, because he left.");
+        //Util.sendPluginMessage("&cPlayer "+player.getName()+" was removed from the game, because he left.");
     }
 
 }
