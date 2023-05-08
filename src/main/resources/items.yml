@@ -29,6 +29,11 @@ items:
     Lore:
       - ''
       - '&4Kill them all!'
+  slenderman-compass:
+    DisplayName: "&cSlenderMan's Compass"
+    Lore:
+      - ''
+      - '&4Find them all!'
   survivor-sword:
     DisplayName: "&bSurvivor's Sword"
     Lore:

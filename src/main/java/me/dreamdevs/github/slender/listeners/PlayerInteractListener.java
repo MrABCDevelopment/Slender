@@ -6,6 +6,7 @@ import me.dreamdevs.github.slender.api.menu.MenuItem;
 import me.dreamdevs.github.slender.game.Arena;
 import me.dreamdevs.github.slender.game.ArenaState;
 import me.dreamdevs.github.slender.game.GamePlayer;
+import me.dreamdevs.github.slender.game.Role;
 import me.dreamdevs.github.slender.menu.MyProfileMenu;
 import me.dreamdevs.github.slender.menu.SpectatorMenu;
 import me.dreamdevs.github.slender.utils.CustomItem;
@@ -22,8 +23,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.Map;
 
 public class PlayerInteractListener implements Listener {
 
@@ -87,6 +91,17 @@ public class PlayerInteractListener implements Listener {
                 event.setCancelled(true);
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, (float) Math.random());
                 new SpectatorMenu(player);
+            }
+
+            if (itemStack.getType() == Material.COMPASS) {
+                event.setCancelled(true);
+                Player target = gamePlayer.getArena().getPlayers().entrySet().stream().filter(playerRoleEntry -> playerRoleEntry.getValue() == Role.SURVIVOR).map(Map.Entry::getKey).findAny().orElse(null);
+                if(target == null)
+                    return;
+
+                CompassMeta compassMeta = (CompassMeta) itemStack.getItemMeta();
+                compassMeta.setLodestone(target.getLocation());
+                itemStack.setItemMeta(compassMeta);
             }
 
             if(event.getItem().getType() == Material.TORCH) {

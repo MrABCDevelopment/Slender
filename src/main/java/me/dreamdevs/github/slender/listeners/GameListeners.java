@@ -109,6 +109,7 @@ public class GameListeners implements Listener {
             event.setRespawnLocation(gamePlayer.getArena().getSlenderSpawnLocation());
             event.getPlayer().getInventory().clear();
             event.getPlayer().getInventory().setItem(0, CustomItem.SLENDERMAN_WEAPON.toItemStack());
+            event.getPlayer().getInventory().setItem(1, CustomItem.SLENDERMAN_COMPASS.toItemStack());
             event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(40);
             event.getPlayer().setHealth(40);
             Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, Integer.MAX_VALUE)), 2L);

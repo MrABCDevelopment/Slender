@@ -23,8 +23,6 @@ Ssrc/main/java/me/dreamdevs/github/slender/api/events/SlenderPlayerLevelUpEvent.
 Ssrc/main/java/me/dreamdevs/github/slender/api/events/SlenderPlayerExpGainEvent.java,c\6\c68fdb6ee44c4994201e54cdcbe814c67caa4333
 u
 Esrc/main/java/me/dreamdevs/github/slender/managers/ConfigManager.java,f\e\fe8a745fed9426e4853203b72fecc33ab034cb69
-
-Osrc/main/java/me/dreamdevs/github/slender/listeners/PlayerInteractListener.java,b\7\b726b1b7acb9e3a2f9600afe1fb485ddd121f596
 l
 <src/main/java/me/dreamdevs/github/slender/api/menu/Menu.java,f\b\fb8fb27dd2a779c3aeafdc5ff7a62751f006286c
 q
@@ -41,8 +39,6 @@ x
 Hsrc/main/java/me/dreamdevs/github/slender/listeners/PlayerListeners.java,f\a\faf96f2ea952c43ccded3102c0f4d0d1d2ec5be0
 q
 Asrc/main/java/me/dreamdevs/github/slender/menu/SpectatorMenu.java,0\f\0f5da4de727538b669b5100c50ca0a6fb8b895e1
-o
-?src/main/java/me/dreamdevs/github/slender/utils/ColourUtil.java,6\e\6e796b78d0b75c309c75aa4ad8b18dcf14f9a8a5
 h
 8src/main/java/me/dreamdevs/github/slender/game/Role.java,4\a\4a6b818053ad6e201193bbcee1b36039d47c9a60
 v
@@ -53,7 +49,13 @@ i
 9src/main/java/me/dreamdevs/github/slender/game/Lobby.java,1\c\1c34047b620a8427e5088241989a4bff11cd2139
 i
 9src/main/java/me/dreamdevs/github/slender/utils/Util.java,b\0\b042e626b39f1b7c9d176a7d74ea82f3e77e0814
-o
-?src/main/java/me/dreamdevs/github/slender/utils/CustomItem.java,9\2\92d785071baa2cde5d46deef5d14fc9414a0d00b
-i
-9src/main/java/me/dreamdevs/github/slender/game/Arena.java,a\0\a062574fbc1092cf43493f87b02699f0af195556
+s
+Csrc/main/java/me/dreamdevs/github/slender/managers/GameManager.java,f\e\fe8c9fb047a5f72c18638e87c160e9f117b18471
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+j
+:src/main/java/me/dreamdevs/github/slender/SlenderMain.java,4\4\44acb83af4f1d374dc958cffa8dc07df9d1b045d
+n
+>src/main/java/me/dreamdevs/github/slender/menu/EditorMenu.java,d\b\db2cf07f0315336cb8d4cf2bc3ba60658115cc2d
+p
+@src/main/java/me/dreamdevs/github/slender/api/menu/MenuItem.java,e\a\ea85b5ce29c50c3ddf119284630f0961b38353d7

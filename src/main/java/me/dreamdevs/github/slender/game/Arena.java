@@ -151,6 +151,7 @@ public class Arena extends BukkitRunnable {
         slenderMan.getScoreboard().getTeam("slenderman").addPlayer(slenderMan);
         slenderMan.getInventory().clear();
         slenderMan.getInventory().setItem(0, CustomItem.SLENDERMAN_WEAPON.toItemStack());
+        slenderMan.getInventory().setItem(1, CustomItem.SLENDERMAN_COMPASS.toItemStack());
 
         tempList.forEach(player -> {
             player.teleport(survivorsLocations.get(Util.getRandomNumber(survivorsLocations.size())));

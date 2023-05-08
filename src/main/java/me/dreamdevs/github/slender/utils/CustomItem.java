@@ -28,7 +28,10 @@ public enum CustomItem {
 
     // SlenderMan's items
     SLENDERMAN_WEAPON(Material.IRON_SWORD, SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getString("items.slenderman-sword.DisplayName"),
-            SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.slenderman-sword.Lore"));
+            SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.slenderman-sword.Lore")),
+
+    SLENDERMAN_COMPASS(Material.COMPASS, SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getString("items.slenderman-compass.DisplayName"),
+            SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.slenderman-compass.Lore"));
 
     private String displayName;
     private Material material;
