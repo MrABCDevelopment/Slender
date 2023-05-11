@@ -93,14 +93,7 @@ public class Arena extends BukkitRunnable {
         if(arenaState == ArenaState.STARTING) {
             sendTitleToAllPlayers("", SlenderMain.getInstance().getMessagesManager().getMessage("arena-starting-subtitle").replaceAll("%TIME%", String.valueOf(timer)), 0, 25, 25);
             if(timer == 0) {
-                this.bossBar.setTitle(ColourUtil.colorize(SlenderMain.getInstance().getMessagesManager().getMessage("arena-boss-bar-time-left").replaceAll("%TIME%", String.valueOf(timer))));
-                sendTitleToAllPlayers("&c&lStop It Slender!", "&4Good Luck!", 10, 30, 10);
-                sendPlayersToGame();
-                setArenaState(ArenaState.RUNNING);
-                setTimer(gameTime);
-                spawnPage();
-                SlenderGameStartEvent slenderGameStartEvent = new SlenderGameStartEvent(this);
-                Bukkit.getPluginManager().callEvent(slenderGameStartEvent);
+                start();
                 return;
             }
             timer--;
@@ -137,6 +130,17 @@ public class Arena extends BukkitRunnable {
             Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> setArenaState(ArenaState.WAITING), 100L);
         }
 
+    }
+
+    public void start() {
+        this.bossBar.setTitle(ColourUtil.colorize(SlenderMain.getInstance().getMessagesManager().getMessage("arena-boss-bar-time-left").replaceAll("%TIME%", String.valueOf(timer))));
+        sendTitleToAllPlayers("&c&lStop It Slender!", "&4Good Luck!", 10, 30, 10);
+        sendPlayersToGame();
+        setArenaState(ArenaState.RUNNING);
+        setTimer(gameTime);
+        spawnPage();
+        SlenderGameStartEvent slenderGameStartEvent = new SlenderGameStartEvent(this);
+        Bukkit.getPluginManager().callEvent(slenderGameStartEvent);
     }
 
     private void sendPlayersToGame() {
@@ -185,10 +189,21 @@ public class Arena extends BukkitRunnable {
     public void restart() {
         Bukkit.getWorlds().forEach(world -> world.getEntities().stream().filter(Item.class::isInstance).forEach(Entity::remove));
 
+        SlenderMain.getInstance().getPlayerManager().getPlayers().stream().filter(gamePlayer -> gamePlayer.isInArena() && gamePlayer.getArena().equals(this) && gamePlayer.isAutoJoinMode()).forEach(gamePlayer -> {
+            SlenderMain.getInstance().getGameManager().leaveGame(gamePlayer.getPlayer(), this);
+            Arena arena = SlenderMain.getInstance().getGameManager().getAvailableArena();
+            if(arena == null) {
+                gamePlayer.getPlayer().sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("no-available-arenas"));
+                return;
+            }
+            SlenderMain.getInstance().getGameManager().joinGame(gamePlayer.getPlayer(), arena);
+        });
+
         players.keySet().forEach(player -> {
             player.sendMessage(ColourUtil.colorize(SlenderMain.getInstance().getMessagesManager().getMessage("arena-game-stopped")));
             SlenderMain.getInstance().getGameManager().leaveGame(player, this);
         });
+
         setArenaState(ArenaState.RESTARTING);
         this.scoreboard = null;
         players.clear();
@@ -242,6 +257,10 @@ public class Arena extends BukkitRunnable {
 
     public void sendMessage(String message) {
         players.keySet().forEach(player -> player.sendMessage(ColourUtil.colorize(message)));
+    }
+
+    public boolean isRunning() {
+        return getArenaState() == ArenaState.RUNNING || getArenaState() == ArenaState.ENDING;
     }
 
 }

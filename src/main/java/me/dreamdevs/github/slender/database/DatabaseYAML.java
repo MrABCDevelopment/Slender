@@ -36,6 +36,9 @@ public class DatabaseYAML implements IData {
         playerData.set("Statistics.Exp", gamePlayer.getExp());
         playerData.set("Statistics.KilledSurvivors", gamePlayer.getKilledSurvivors());
         playerData.set("Statistics.KilledSlenderMen", gamePlayer.getKilledSlenderMen());
+        playerData.set("PlayerSettings.AutoArenaJoin", gamePlayer.isAutoJoinMode());
+        playerData.set("PlayerSettings.ShowJoinArenaMessage", gamePlayer.isShowArenaJoinMessage());
+        playerData.set("PlayerSettings.MessagesType", gamePlayer.getMessagesType());
         try {
             playerData.save(playerFile);
         } catch (Exception e) {}
@@ -52,5 +55,9 @@ public class DatabaseYAML implements IData {
         gamePlayer.setExp(playerData.getInt("Statistics.Exp", 0));
         gamePlayer.setKilledSlenderMen(playerData.getInt("Statistics.KilledSlenderMen", 0));
         gamePlayer.setKilledSurvivors(playerData.getInt("Statistics.KilledSurvivors", 0));
+
+        gamePlayer.setAutoJoinMode(playerData.getBoolean("PlayerSettings.AutoArenaJoin", false));
+        gamePlayer.setShowArenaJoinMessage(playerData.getBoolean("PlayerSettings.ShowJoinArenaMessage", true));
+        gamePlayer.setMessagesType(playerData.getString("PlayerSettings.MessagesType", "all"));
     }
 }

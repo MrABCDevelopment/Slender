@@ -26,10 +26,19 @@ public class MyProfileMenu {
                 .replaceAll("%KILLED_SLENDERMEN%", String.valueOf(gamePlayer.getKilledSlenderMen()))
                 .replaceAll("%TOTAL_KILLS%", String.valueOf((gamePlayer.getKilledSlenderMen()+gamePlayer.getKilledSurvivors()))));
 
+        List<String> settingsList = ColourUtil.colouredLore(SlenderMain.getInstance().getMessagesManager().getMessage("my-profile-settings-item-lore"));
+
         MenuItem stats = new MenuItem().material(Material.PAPER).name(SlenderMain.getInstance().getMessagesManager().getMessage("my-profile-stats-item-name"))
                 .lore(list).build();
 
-        menu.setItem(13, stats);
+        MenuItem settings = new MenuItem().material(Material.REPEATER).name(SlenderMain.getInstance().getMessagesManager().getMessage("my-profile-settings-item-name"))
+                .lore(settingsList).action(event -> {
+                    player.closeInventory();
+                    new SettingsMenu(player);
+                }).build();
+
+        menu.setItem(12, settings);
+        menu.setItem(14, stats);
 
         menu.open(player);
     }

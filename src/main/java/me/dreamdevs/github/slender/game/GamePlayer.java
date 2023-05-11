@@ -18,6 +18,11 @@ public class GamePlayer {
     private int killedSurvivors;
     private int killedSlenderMen;
 
+    // Player's settings
+    private boolean autoJoinMode;
+    private boolean showArenaJoinMessage;
+    private String messagesType;
+
     public GamePlayer(Player player) {
         this.player = player;
     }

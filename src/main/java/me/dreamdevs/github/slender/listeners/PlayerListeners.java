@@ -49,9 +49,14 @@ public class PlayerListeners implements Listener {
         event.getRecipients().clear();
         if(gamePlayer.isInArena()) {
             Arena arena = gamePlayer.getArena();
-            arena.getPlayers().keySet().forEach(player -> event.getRecipients().add(player));
+            arena.getPlayers().keySet().stream().map(player -> SlenderMain.getInstance().getPlayerManager().getPlayer(player))
+                    .filter(arenaPlayer -> arenaPlayer.getMessagesType().equalsIgnoreCase("all")
+                    || arenaPlayer.getMessagesType().equalsIgnoreCase("arena")).forEach(player -> event.getRecipients().add(player.getPlayer()));
         } else {
-            Bukkit.getOnlinePlayers().stream().filter(player -> !SlenderMain.getInstance().getGameManager().isInArena(player)).forEach(player -> event.getRecipients().add(player));
+            Bukkit.getOnlinePlayers().stream().map(player -> SlenderMain.getInstance().getPlayerManager().getPlayer(player))
+                    .filter(lobbyPlayer -> !lobbyPlayer.isInArena()
+                            && (lobbyPlayer.getMessagesType().equalsIgnoreCase("all") ||
+                            lobbyPlayer.getMessagesType().equalsIgnoreCase("lobby"))).forEach(player -> event.getRecipients().add(player.getPlayer()));
         }
     }
 

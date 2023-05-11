@@ -13,10 +13,13 @@ public enum CustomItem {
 
     ARENA_SELECTOR(Material.CHEST, SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getString("items.arena-selector.DisplayName"),
             SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.arena-selector.Lore")),
+
     LEAVE(Material.RED_BED, SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getString("items.leave.DisplayName"),
             SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.leave.Lore")),
+
     MY_PROFILE(Material.PLAYER_HEAD, SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getString("items.profile.DisplayName"),
             SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.profile.Lore")),
+
     PLAY_AGAIN(Material.PAPER, SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getString("items.play-again.DisplayName"),
             SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.play-again.Lore")),
 

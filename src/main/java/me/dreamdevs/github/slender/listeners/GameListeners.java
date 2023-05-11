@@ -49,6 +49,7 @@ public class GameListeners implements Listener {
         }
      }
 
+
     @EventHandler
     public void deathPlayer(PlayerDeathEvent event) {
         event.setDeathMessage(null);

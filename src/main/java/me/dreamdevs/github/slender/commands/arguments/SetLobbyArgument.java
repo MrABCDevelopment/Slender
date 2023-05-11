@@ -18,9 +18,6 @@ public class SetLobbyArgument implements ArgumentCommand {
         Player player = (Player) commandSender;
         Lobby lobby = SlenderMain.getInstance().getLobby();
         lobby.saveLobby(player);
-        Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> {
-            player.teleport(lobby.getLobbyLocation());
-        }, 60L);
         player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("lobby-set-successfully"));
         return true;
     }

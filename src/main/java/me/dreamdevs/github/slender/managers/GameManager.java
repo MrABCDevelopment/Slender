@@ -61,7 +61,8 @@ public class GameManager {
                 playerGame.showPlayer(SlenderMain.getInstance(), player);
             });
 
-            player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-join-game-info"));
+            if(gamePlayer.isShowArenaJoinMessage())
+                player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-join-game-info"));
 
             SlenderJoinArenaEvent slenderJoinArenaEvent = new SlenderJoinArenaEvent(gamePlayer, arena);
             Bukkit.getPluginManager().callEvent(slenderJoinArenaEvent);
@@ -144,6 +145,10 @@ public class GameManager {
         try {
             configuration.save(f);
         } catch (IOException e) { }
+    }
+
+    public Arena getAvailableArena() {
+        return arenas.stream().filter(arena -> !arena.isRunning() && arena.getSurvivorsAmount() != arena.getMaxPlayers()).findAny().orElse(null);
     }
 
     public boolean isInArena(Player player) {
