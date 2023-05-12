@@ -134,7 +134,7 @@ public class Arena extends BukkitRunnable {
 
     public void start() {
         this.bossBar.setTitle(ColourUtil.colorize(SlenderMain.getInstance().getMessagesManager().getMessage("arena-boss-bar-time-left").replaceAll("%TIME%", String.valueOf(timer))));
-        sendTitleToAllPlayers("&c&lStop It Slender!", "&4Good Luck!", 10, 30, 10);
+        sendTitleToAllPlayers(SlenderMain.getInstance().getMessagesManager().getMessage("arena-title"), SlenderMain.getInstance().getMessagesManager().getMessage("arena-started-subtitle"), 10, 30, 10);
         sendPlayersToGame();
         setArenaState(ArenaState.RUNNING);
         setTimer(gameTime);
@@ -214,13 +214,13 @@ public class Arena extends BukkitRunnable {
         this.bossBar.setTitle(SlenderMain.getInstance().getMessagesManager().getMessage("arena-boss-bar-teleport-to-lobby").replaceAll("%TIME%", String.valueOf(timer)));
 
         if(getCollectedPages() < 8) {
-            sendTitleToAllPlayers("&c&lStop It Slender!", SlenderMain.getInstance().getMessagesManager().getMessage("arena-slenderman-win-subtitle"), 10, 50, 10);
+            sendTitleToAllPlayers(SlenderMain.getInstance().getMessagesManager().getMessage("arena-title"), SlenderMain.getInstance().getMessagesManager().getMessage("arena-slenderman-win-subtitle"), 10, 50, 10);
 
             GamePlayer gamePlayer = SlenderMain.getInstance().getPlayerManager().getPlayer(slenderMan);
             gamePlayer.setWins(gamePlayer.getWins()+1);
 
         } else {
-            sendTitleToAllPlayers("&c&lStop It Slender!", SlenderMain.getInstance().getMessagesManager().getMessage("arena-survivors-win-subtitle"), 10, 50, 10);
+            sendTitleToAllPlayers(SlenderMain.getInstance().getMessagesManager().getMessage("arena-title"), SlenderMain.getInstance().getMessagesManager().getMessage("arena-survivors-win-subtitle"), 10, 50, 10);
             getPlayers().entrySet().stream().filter(playerRoleEntry -> playerRoleEntry.getValue() == Role.SURVIVOR).forEach(playerRoleEntry -> {
                 GamePlayer gamePlayer = SlenderMain.getInstance().getPlayerManager().getPlayer(playerRoleEntry.getKey());
                 gamePlayer.setWins(gamePlayer.getWins()+1);
@@ -245,7 +245,7 @@ public class Arena extends BukkitRunnable {
         ItemStack itemStack = new ItemStack(Material.PAPER);
 
         Item item = slenderSpawnLocation.getWorld().dropItem(getPagesLocations().get(Util.getRandomNumber(getPagesLocations().size())), itemStack);
-        item.setCustomName(ColourUtil.colorize("&6Page "+(collectedPages+1)));
+        item.setCustomName(SlenderMain.getInstance().getMessagesManager().getMessage("arena-page-name").replaceAll("%NUMBER%", String.valueOf((collectedPages+1))));
         item.setCustomNameVisible(true);
 
         sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-page-spawned-announcement"));

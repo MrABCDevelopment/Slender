@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class MessagesManager {
 
-    private Map<String, String> messages;
+    private final Map<String, String> messages;
 
     public MessagesManager(SlenderMain plugin) {
         messages = new HashMap<>();

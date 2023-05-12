@@ -13,12 +13,15 @@ messages:
   arena-survivor-left-game: '&e%PLAYER% left the game!'
   arena-page-spawned-announcement: '&eThe page was spawned somewhere in the dark!'
   arena-spectator-mode: '&eYou are now spectator!'
+  arena-page-name: '&6Page %NUMBER%'
 
   arena-join-game-info: "&a&l❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚\n&r\n                    &f&lStop It Slender           \n&r\n\n    &e&lFind all pages or die by SlenderMan!
                          \n   &e&lUse your torches to light up a little!\n&r\n&a&l❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚"
 
+  arena-title: '&c&lStop It Slender!'
   arena-waiting-subtitle: '&7Waiting for players...'
   arena-starting-subtitle: '&aStarting in %TIME% seconds...'
+  arena-started-subtitle: '&4Good Luck!'
   arena-survivors-win-subtitle: "&aSurvivors won the game!"
   arena-slenderman-win-subtitle: "&cSlenderMan won the game!"
   arena-no-slots: '&cThis game is full!'
