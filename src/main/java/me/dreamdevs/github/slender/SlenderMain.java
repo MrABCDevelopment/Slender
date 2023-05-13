@@ -63,6 +63,22 @@ public class SlenderMain extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new GameListeners(), this);
 
         this.database.autoSaveData();
+
+        new Metrics(this, 18471);
+        Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> new UpdateChecker(this, 109730).getVersion(version -> {
+            if (getDescription().getVersion().equals(version)) {
+                Util.sendPluginMessage("");
+                Util.sendPluginMessage("&aYour version is up to date!");
+                Util.sendPluginMessage("&aYour version: " + getDescription().getVersion());
+                Util.sendPluginMessage("");
+            } else {
+                Util.sendPluginMessage("");
+                Util.sendPluginMessage("&aThere is new Stop It Slender version!");
+                Util.sendPluginMessage("&aYour version: " + getDescription().getVersion());
+                Util.sendPluginMessage("&aNew version: " + version);
+                Util.sendPluginMessage("");
+            }
+        }), 10L, 20L * 300);
     }
 
     @Override

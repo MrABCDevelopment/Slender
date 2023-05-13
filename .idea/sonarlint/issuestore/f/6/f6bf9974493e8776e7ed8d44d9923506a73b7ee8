@@ -1,5 +1,0 @@
-
-^
-java:S5361M"HReplace this call to "replaceAll()" by a call to the "replace()" method.(‰ÛÍ’
-X
-java:S1874y"=Remove this use of "PlayerPickupItemEvent"; it is deprecated.(ïþé üÿÿÿÿ
