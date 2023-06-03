@@ -127,7 +127,7 @@ public class GameManager {
 
         if(SlenderMain.getInstance().getPartyManager().isInParty(gamePlayer) && SlenderMain.getInstance().getPartyManager().getParty(gamePlayer).getLeader().equals(gamePlayer)) {
             Party party = SlenderMain.getInstance().getPartyManager().getParty(gamePlayer);
-            party.getMembersList().forEach(member -> this.leaveGame(gamePlayer.getPlayer(), arena));
+            party.getMembersList().forEach(this::forceRemovePlayerFromGame);
         }
 
         SlenderQuitArenaEvent slenderQuitArenaEvent = new SlenderQuitArenaEvent(gamePlayer, arena);
