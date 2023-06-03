@@ -34,6 +34,12 @@ public class Menu implements InventoryHolder {
         Arrays.fill(menuItems, new MenuItem().material(Material.WHITE_STAINED_GLASS_PANE).name("&c&l*").build());
     }
 
+    public void fill() {
+        for(int x = 0; x<inventory.getSize(); x++) {
+            setItem(x, new MenuItem().material(Material.WHITE_STAINED_GLASS_PANE).name("&c&l*").build());
+        }
+    }
+
     public void setItem(int slot, MenuItem menuItem) {
         this.menuItems[slot] = menuItem;
     }

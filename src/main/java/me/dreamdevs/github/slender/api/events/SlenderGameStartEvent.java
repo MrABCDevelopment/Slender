@@ -7,7 +7,7 @@ import org.bukkit.event.HandlerList;
 
 public class SlenderGameStartEvent extends Event {
 
-    private final HandlerList handlerList = new HandlerList();
+    private @Getter static final HandlerList handlerList = new HandlerList();
 
     private @Getter Arena arena;
 

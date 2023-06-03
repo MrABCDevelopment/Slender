@@ -11,7 +11,7 @@ public class ArenaCreateArgument implements ArgumentCommand {
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
         if(args[1] == null) {
-            commandSender.sendMessage(ColourUtil.colorize("&cThere's no ID! Type any id to create an arena!"));
+            commandSender.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("no-arena"));
             return true;
         }
         Arena arena = new Arena(args[1]);

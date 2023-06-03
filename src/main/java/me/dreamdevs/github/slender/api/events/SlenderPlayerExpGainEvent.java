@@ -9,7 +9,7 @@ import org.bukkit.event.HandlerList;
 @Getter @Setter
 public class SlenderPlayerExpGainEvent extends Event {
 
-    private final HandlerList handlerList = new HandlerList();
+    private @Getter static final HandlerList handlerList = new HandlerList();
 
     private final GamePlayer gamePlayer;
     private int exp;

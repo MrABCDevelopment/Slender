@@ -2,7 +2,7 @@ package me.dreamdevs.github.slender.commands;
 
 import lombok.Getter;
 import me.dreamdevs.github.slender.SlenderMain;
-import me.dreamdevs.github.slender.commands.arguments.*;
+import me.dreamdevs.github.slender.commands.partyarguments.*;
 import me.dreamdevs.github.slender.utils.ColourUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -14,20 +14,20 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class CommandHandler implements TabExecutor {
+public class PartyCommandHandler implements TabExecutor {
 
     private final @Getter HashMap<String, Class<? extends ArgumentCommand>> arguments;
 
-    public CommandHandler(SlenderMain plugin) {
+    public PartyCommandHandler(SlenderMain plugin) {
         this.arguments = new HashMap<>();
-        registerCommand("setlobby", SetLobbyArgument.class);
-        registerCommand("createarena", ArenaCreateArgument.class);
-        registerCommand("editarena", ArenaEditArgument.class);
-        registerCommand("deletearena", ArenaDeleteArgument.class);
-        registerCommand("join", ArenaJoinArgument.class);
-        registerCommand("leave", ArenaLeaveArgument.class);
-        plugin.getCommand("stopitslender").setExecutor(this);
-        plugin.getCommand("stopitslender").setTabCompleter(this);
+        registerCommand("create", PartyCreateArgument.class);
+        registerCommand("delete", PartyDeleteArgument.class);
+        registerCommand("invite", PartyInviteArgument.class);
+        registerCommand("kick", PartyKickMemberArgument.class);
+        registerCommand("accept", PartyAcceptInviteArgument.class);
+        registerCommand("leave", PartyLeaveArgument.class);
+        plugin.getCommand("party").setExecutor(this);
+        plugin.getCommand("party").setTabCompleter(this);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class CommandHandler implements TabExecutor {
                     return true;
                 }
             } else {
-                commandSender.sendMessage(ColourUtil.colorize("&aHelp for Stop It Slender:"));
+                commandSender.sendMessage(ColourUtil.colorize("&aHelp for Stop It Slender Party:"));
                 for(Class<? extends ArgumentCommand> argumentCommand : arguments.values()) {
                     commandSender.sendMessage(ColourUtil.colorize(argumentCommand.newInstance().getHelpText()));
                 }

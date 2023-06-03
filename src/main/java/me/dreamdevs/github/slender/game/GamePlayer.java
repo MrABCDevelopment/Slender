@@ -3,6 +3,7 @@ package me.dreamdevs.github.slender.game;
 import lombok.Getter;
 import lombok.Setter;
 import me.dreamdevs.github.slender.SlenderMain;
+import me.dreamdevs.github.slender.game.perks.Perks;
 import org.bukkit.entity.Player;
 
 @Setter @Getter
@@ -22,6 +23,9 @@ public class GamePlayer {
     private boolean autoJoinMode;
     private boolean showArenaJoinMessage;
     private String messagesType;
+
+    private Perks equippedSurvivorPerk;
+    private Perks equippedSlenderManPerk;
 
     public GamePlayer(Player player) {
         this.player = player;

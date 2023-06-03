@@ -3,6 +3,7 @@ package me.dreamdevs.github.slender.database;
 import me.dreamdevs.github.slender.SlenderMain;
 import me.dreamdevs.github.slender.api.database.IData;
 import me.dreamdevs.github.slender.game.GamePlayer;
+import me.dreamdevs.github.slender.game.perks.Perks;
 import me.dreamdevs.github.slender.utils.Util;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -39,6 +40,8 @@ public class DatabaseYAML implements IData {
         playerData.set("PlayerSettings.AutoArenaJoin", gamePlayer.isAutoJoinMode());
         playerData.set("PlayerSettings.ShowJoinArenaMessage", gamePlayer.isShowArenaJoinMessage());
         playerData.set("PlayerSettings.MessagesType", gamePlayer.getMessagesType());
+        playerData.set("PlayerPerks.EquippedSurvivorPerk", gamePlayer.getEquippedSurvivorPerk().name());
+        playerData.set("PlayerPerks.EquippedSlenderManPerk", gamePlayer.getEquippedSlenderManPerk().name());
         try {
             playerData.save(playerFile);
         } catch (Exception e) {}
@@ -59,5 +62,8 @@ public class DatabaseYAML implements IData {
         gamePlayer.setAutoJoinMode(playerData.getBoolean("PlayerSettings.AutoArenaJoin", false));
         gamePlayer.setShowArenaJoinMessage(playerData.getBoolean("PlayerSettings.ShowJoinArenaMessage", true));
         gamePlayer.setMessagesType(playerData.getString("PlayerSettings.MessagesType", "all"));
+
+        gamePlayer.setEquippedSurvivorPerk(Perks.valueOf(playerData.getString("PlayerPerks.EquippedSurvivorPerk", "NONE")));
+        gamePlayer.setEquippedSlenderManPerk(Perks.valueOf(playerData.getString("PlayerPerks.EquippedSlenderManPerk", "NONE")));
     }
 }

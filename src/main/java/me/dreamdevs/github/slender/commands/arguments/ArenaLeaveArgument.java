@@ -3,12 +3,11 @@ package me.dreamdevs.github.slender.commands.arguments;
 import me.dreamdevs.github.slender.SlenderMain;
 import me.dreamdevs.github.slender.commands.ArgumentCommand;
 import me.dreamdevs.github.slender.game.Arena;
-import me.dreamdevs.github.slender.menu.EditorMenu;
-import me.dreamdevs.github.slender.utils.ColourUtil;
+import me.dreamdevs.github.slender.game.GamePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class ArenaEditArgument implements ArgumentCommand {
+public class ArenaLeaveArgument implements ArgumentCommand {
 
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
@@ -16,31 +15,24 @@ public class ArenaEditArgument implements ArgumentCommand {
             commandSender.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("console-only-player"));
             return true;
         }
-        if(args.length > 2) {
+        if(args.length > 1) {
             commandSender.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("too-many-arguments"));
             return true;
         }
-        if(args[1] == null) {
-            commandSender.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("no-arena"));
-            return true;
-        }
-        Player player = (Player) commandSender;
-        Arena arena = SlenderMain.getInstance().getGameManager().getArena(args[1]);
-        if(arena == null) {
-            player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("no-arena"));
-            return true;
-        }
-        new EditorMenu(player, arena);
+
+        GamePlayer gamePlayer = SlenderMain.getInstance().getPlayerManager().getPlayer((Player) commandSender);
+
+        SlenderMain.getInstance().getGameManager().leaveGame(gamePlayer.getPlayer(), gamePlayer.getArena());
         return true;
     }
 
     @Override
     public String getHelpText() {
-        return "&c/stopitslender editarena <id> - edits an arena with specific ID";
+        return "&c/stopitslender leave - use this command to leave from arena";
     }
 
     @Override
     public String getPermission() {
-        return "stopitslender.admin";
+        return "stopitslender.player";
     }
 }

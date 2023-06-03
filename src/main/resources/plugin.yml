@@ -12,3 +12,6 @@ commands:
   stopitslender:
     aliases: [slender, slenderman, sis]
     description: Main StopItSlender command
+  party:
+    aliases: [slenderparty]
+    description: Party StopItSlender command

@@ -3,14 +3,12 @@ package me.dreamdevs.github.slender.listeners;
 import me.dreamdevs.github.slender.SlenderMain;
 import me.dreamdevs.github.slender.api.menu.Menu;
 import me.dreamdevs.github.slender.api.menu.MenuItem;
-import me.dreamdevs.github.slender.game.Arena;
-import me.dreamdevs.github.slender.game.ArenaState;
-import me.dreamdevs.github.slender.game.GamePlayer;
-import me.dreamdevs.github.slender.game.Role;
+import me.dreamdevs.github.slender.game.*;
 import me.dreamdevs.github.slender.menu.MyProfileMenu;
+import me.dreamdevs.github.slender.menu.PartyMenu;
+import me.dreamdevs.github.slender.menu.PerksMenu;
 import me.dreamdevs.github.slender.menu.SpectatorMenu;
 import me.dreamdevs.github.slender.utils.CustomItem;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -24,8 +22,6 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.Map;
 
@@ -93,6 +89,18 @@ public class PlayerInteractListener implements Listener {
                 new SpectatorMenu(player);
             }
 
+            if (itemStack.getItemMeta().getDisplayName().equals(CustomItem.PARTY_MENU.getDisplayName())) {
+                event.setCancelled(true);
+                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, (float) Math.random());
+                new PartyMenu(player);
+            }
+
+            if (itemStack.getItemMeta().getDisplayName().equals(CustomItem.PERKS.getDisplayName())) {
+                event.setCancelled(true);
+                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, (float) Math.random());
+                new PerksMenu(player);
+            }
+
             if (itemStack.getType() == Material.COMPASS) {
                 event.setCancelled(true);
                 Player target = gamePlayer.getArena().getPlayers().entrySet().stream().filter(playerRoleEntry -> playerRoleEntry.getValue() == Role.SURVIVOR).map(Map.Entry::getKey).findAny().orElse(null);
@@ -104,18 +112,6 @@ public class PlayerInteractListener implements Listener {
                 itemStack.setItemMeta(compassMeta);
             }
 
-            if(event.getItem().getType() == Material.TORCH) {
-                if(!gamePlayer.isInArena())
-                    return;
-                gamePlayer.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
-                gamePlayer.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 40, 0));
-                ItemStack itemStack1 = gamePlayer.getPlayer().getInventory().getItemInMainHand();
-                gamePlayer.getPlayer().getInventory().getItemInMainHand().setAmount(itemStack1.getAmount()-1);
-                Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> {
-                    gamePlayer.getPlayer().removePotionEffect(PotionEffectType.NIGHT_VISION);
-                    gamePlayer.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, Integer.MAX_VALUE));
-                }, 40L);
-            }
         }
     }
 

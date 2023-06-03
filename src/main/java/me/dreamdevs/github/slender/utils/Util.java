@@ -1,11 +1,13 @@
 package me.dreamdevs.github.slender.utils;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import java.io.File;
 import java.util.Random;
 
+@UtilityClass
 public class Util {
 
     private static final Random random = new Random();
@@ -36,9 +38,7 @@ public class Util {
             int z = Integer.parseInt(params[2]);
             String world = params[3];
             return new Location(Bukkit.getWorld(world),x,y,z);
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
         return null;
     }
 

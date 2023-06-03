@@ -3,12 +3,10 @@ package me.dreamdevs.github.slender.commands.arguments;
 import me.dreamdevs.github.slender.SlenderMain;
 import me.dreamdevs.github.slender.commands.ArgumentCommand;
 import me.dreamdevs.github.slender.game.Arena;
-import me.dreamdevs.github.slender.menu.EditorMenu;
-import me.dreamdevs.github.slender.utils.ColourUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class ArenaEditArgument implements ArgumentCommand {
+public class ArenaJoinArgument implements ArgumentCommand {
 
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
@@ -20,27 +18,25 @@ public class ArenaEditArgument implements ArgumentCommand {
             commandSender.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("too-many-arguments"));
             return true;
         }
-        if(args[1] == null) {
+
+        Arena arena = SlenderMain.getInstance().getGameManager().getArena(args[1]);
+        if(arena == null) {
             commandSender.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("no-arena"));
             return true;
         }
+
         Player player = (Player) commandSender;
-        Arena arena = SlenderMain.getInstance().getGameManager().getArena(args[1]);
-        if(arena == null) {
-            player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("no-arena"));
-            return true;
-        }
-        new EditorMenu(player, arena);
+        SlenderMain.getInstance().getGameManager().joinGame(player, arena);
         return true;
     }
 
     @Override
     public String getHelpText() {
-        return "&c/stopitslender editarena <id> - edits an arena with specific ID";
+        return "&c/stopitslender join <id> - joins to an arena with specific ID";
     }
 
     @Override
     public String getPermission() {
-        return "stopitslender.admin";
+        return "stopitslender.player";
     }
 }

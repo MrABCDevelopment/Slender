@@ -8,6 +8,7 @@ import me.dreamdevs.github.slender.game.Arena;
 import me.dreamdevs.github.slender.game.ArenaState;
 import me.dreamdevs.github.slender.game.GamePlayer;
 import me.dreamdevs.github.slender.game.Role;
+import me.dreamdevs.github.slender.game.party.Party;
 import me.dreamdevs.github.slender.utils.CustomItem;
 import me.dreamdevs.github.slender.utils.Util;
 import org.bukkit.Bukkit;
@@ -45,12 +46,51 @@ public class GameManager {
                 return;
             }
 
+            if(SlenderMain.getInstance().getPartyManager().isInParty(gamePlayer)) {
+                if(!SlenderMain.getInstance().getPartyManager().getParty(gamePlayer).getLeader().equals(gamePlayer)) {
+                    player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("party-not-leader"));
+                    return;
+                }
+                Party party = SlenderMain.getInstance().getPartyManager().getParty(gamePlayer);
+                party.getMembersList().forEach(member -> {
+                    member.getPlayer().teleport(arena.getSlenderSpawnLocation());
+                    member.clearInventory();
+                    member.getPlayer().setScoreboard(arena.getScoreboard());
+                    member.getPlayer().getInventory().setItem(8, CustomItem.LEAVE.toItemStack());
+                    arena.getPlayers().put(member.getPlayer(), Role.NONE);
+                    arena.getBossBar().addPlayer(member.getPlayer());
+
+                    Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
+                        member.getPlayer().hidePlayer(SlenderMain.getInstance(), onlinePlayer);
+                        onlinePlayer.hidePlayer(SlenderMain.getInstance(), member.getPlayer());
+                    });
+
+                    arena.getPlayers().keySet().forEach(playerGame -> {
+                        member.getPlayer().showPlayer(SlenderMain.getInstance(), playerGame);
+                        playerGame.showPlayer(SlenderMain.getInstance(), member.getPlayer());
+                    });
+
+                    if(member.isShowArenaJoinMessage())
+                        member.getPlayer().sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-join-game-info"));
+
+                    SlenderJoinArenaEvent slenderJoinArenaEvent = new SlenderJoinArenaEvent(member, arena);
+                    Bukkit.getPluginManager().callEvent(slenderJoinArenaEvent);
+
+                    if(arena.getPlayers().size() >= arena.getMinPlayers()) {
+                        arena.setArenaState(ArenaState.STARTING);
+                        arena.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-starting-info"));
+                        arena.setTimer(30);
+                    }
+                });
+            }
+
             player.teleport(arena.getSlenderSpawnLocation());
             gamePlayer.clearInventory();
             player.setScoreboard(arena.getScoreboard());
             player.getInventory().setItem(8, CustomItem.LEAVE.toItemStack());
             arena.getPlayers().put(player, Role.NONE);
             arena.getBossBar().addPlayer(player);
+
             Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
                 player.hidePlayer(SlenderMain.getInstance(), onlinePlayer);
                 onlinePlayer.hidePlayer(SlenderMain.getInstance(), player);
@@ -83,6 +123,11 @@ public class GameManager {
         if(!forceRemovePlayerFromGame(gamePlayer)) {
             gamePlayer.getPlayer().sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("not-ingame"));
             return;
+        }
+
+        if(SlenderMain.getInstance().getPartyManager().isInParty(gamePlayer) && SlenderMain.getInstance().getPartyManager().getParty(gamePlayer).getLeader().equals(gamePlayer)) {
+            Party party = SlenderMain.getInstance().getPartyManager().getParty(gamePlayer);
+            party.getMembersList().forEach(member -> this.leaveGame(gamePlayer.getPlayer(), arena));
         }
 
         SlenderQuitArenaEvent slenderQuitArenaEvent = new SlenderQuitArenaEvent(gamePlayer, arena);

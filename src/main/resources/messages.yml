@@ -49,12 +49,36 @@ messages:
   no-permission: '&cYou do not have permission to do this!'
   no-argument: '&cArgument does not exist!'
   no-arena: '&cThere is no map with this ID!'
+  no-player: '&cThere is no player!'
+  too-many-arguments: '&cToo many arguments!'
+
+  team-survivors: '&aSurvivors'
+  team-slenderman: '&cSlenderMan'
 
   # Level, etc.
   player-reward-exp: '&a+%AMOUNT% Exp'
   player-level-up: "&a&l❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚\n&r\n                    &f&lStop It Slender           \n&r\n\n                        &3&lLevel Up!
                          \n   &7You are getting better and better!\n     &7Thanks for playing this game!\n      &7Your current level: &b%LEVEL%\n&r\n&a&l❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚"
 
+  perks-selected: '&eYou selected %PERK% &efor %TEAM%'
+
+  # Parties
+  party-created: '&aYou created party!'
+  party-removed: '&cThe party was removed!'
+  party-is-not-in-party: '&cYou are not in party!'
+  party-not-leader: '&cYou are not party leader!'
+  party-no-player: '&cThis player is not in your party!'
+  party-kicked-player: '&b%PLAYER% was kicked from party by %LEADER%'
+  party-cannot-find-public-party: '&cThere is no public party!'
+  party-is-already-in-party: '&cYou are already in party!'
+  party-joined-to-party: '&e%PLAYER% joined to party!'
+  party-left-from-party: '&e%PLAYER% left from party!'
+  party-changed-status: '&b%LEADER% changed party status to: %STATUS%'
+  party-is-not-pending-request: '&cYou do not have pending request to join to the party!'
+  party-invited-player: '&aYou invited %TARGET% to your party!'
+  party-request-message: '&7You have new request to join to the party (click here to accept)'
+
+  # Inventories
   status-on: '&aOn'
   status-off: '&cOff'
 
@@ -94,6 +118,23 @@ messages:
   editor-menu-add-pages-spawn-lore: "\n&7Click to add pages spawn location"
   editor-menu-save-all: '&bSave Settings'
   editor-menu-save-all-lore: "\n&7Click to save settings"
+
+  # Party menu
+  party-opened: '&aOpened'
+  party-closed: '&cClosed'
+  party-menu-title: '&3&lParty'
+  party-menu-create-party-name: '&bCreate Party'
+  party-menu-create-party-lore: "\n&7Click to create party!"
+  party-menu-delete-party-name: '&bDelete Party'
+  party-menu-delete-party-lore: "\n&7Click to delete party!"
+  party-menu-join-party-name: '&bJoin Random Party'
+  party-menu-join-lore: "\n&7Click to join to random public party!"
+  party-menu-open-party-name: '&bOpen or Close party!'
+  party-menu-open-party-lore: "\n&7Click to open or close the party!"
+  party-menu-party-info-name: '&bParty Info'
+  party-menu-party-info-lore: "&7Leader: &b%LEADER%\n&7Members Count: %MEMBERS_COUNT%\n&7Public: %STATUS%"
+
+  perks-menu-title: '&d&lPerks'
 
   # Admin menu
   admin-menu-title: 'Admin Menu'

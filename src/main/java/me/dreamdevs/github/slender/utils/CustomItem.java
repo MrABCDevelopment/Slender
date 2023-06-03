@@ -23,6 +23,12 @@ public enum CustomItem {
     PLAY_AGAIN(Material.PAPER, SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getString("items.play-again.DisplayName"),
             SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.play-again.Lore")),
 
+    PARTY_MENU(Material.SLIME_BALL, SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getString("items.party-menu.DisplayName"),
+            SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.party-menu.Lore")),
+
+    PERKS(Material.FEATHER, SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getString("items.perks.DisplayName"),
+            SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.perks.Lore")),
+
     SPECTATOR_TOOL(Material.STICK, SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getString("items.spectator-settings.DisplayName"),
             SlenderMain.getInstance().getConfigManager().getConfig("items.yml").getStringList("items.spectator-settings.Lore")),
 

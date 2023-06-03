@@ -1,6 +1,9 @@
 package me.dreamdevs.github.slender.listeners;
 
 import me.dreamdevs.github.slender.SlenderMain;
+import me.dreamdevs.github.slender.api.events.SlenderDamageSurvivorEvent;
+import me.dreamdevs.github.slender.api.events.SlenderKillSurvivorEvent;
+import me.dreamdevs.github.slender.api.events.SlenderSurvivorPickupPageEvent;
 import me.dreamdevs.github.slender.game.Arena;
 import me.dreamdevs.github.slender.game.ArenaState;
 import me.dreamdevs.github.slender.game.GamePlayer;
@@ -47,6 +50,11 @@ public class GameListeners implements Listener {
         if(arena.getPlayers().get(damager) == Role.SURVIVOR && arena.getPlayers().get(entity) == Role.SURVIVOR) {
             event.setCancelled(true);
         }
+
+        if(arena.getSlenderMan().equals(attackerPlayer.getPlayer())) {
+            SlenderDamageSurvivorEvent slenderManDamageSurvivorEvent = new SlenderDamageSurvivorEvent(attackerPlayer, victimPlayer, arena, event.getDamage());
+            Bukkit.getPluginManager().callEvent(slenderManDamageSurvivorEvent);
+        }
      }
 
 
@@ -66,6 +74,8 @@ public class GameListeners implements Listener {
         if(arena.getPlayers().get(gamePlayer.getPlayer()) == Role.SURVIVOR) {
             GamePlayer slender = SlenderMain.getInstance().getPlayerManager().getPlayer(arena.getSlenderMan());
             SlenderMain.getInstance().getPlayerManager().addExp(slender, 5);
+            SlenderKillSurvivorEvent slenderManKillSurvivorEvent = new SlenderKillSurvivorEvent(slender, gamePlayer, arena);
+            Bukkit.getPluginManager().callEvent(slenderManKillSurvivorEvent);
             slender.setKilledSurvivors(slender.getKilledSurvivors()+1);
 
             arena.getPlayers().put(gamePlayer.getPlayer(), Role.SPECTATOR);
@@ -75,8 +85,10 @@ public class GameListeners implements Listener {
 
             event.getEntity().getLocation().getWorld().strikeLightningEffect(event.getEntity().getLocation());
             arena.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-killed-by-slenderman").replaceAll("%PLAYER%", gamePlayer.getPlayer().getName()));
+
             Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> {
                 gamePlayer.getPlayer().spigot().respawn();
+                gamePlayer.getPlayer().setGlowing(false);
                 gamePlayer.getPlayer().sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-spectator-mode"));
             }, 4L);
 
@@ -131,6 +143,10 @@ public class GameListeners implements Listener {
         arena.setCollectedPages(arena.getCollectedPages()+1);
         gamePlayer.setCollectedPages(gamePlayer.getCollectedPages()+1);
         SlenderMain.getInstance().getPlayerManager().addExp(gamePlayer, 5);
+
+        SlenderSurvivorPickupPageEvent slenderSurvivorPickupPageEvent = new SlenderSurvivorPickupPageEvent(gamePlayer, arena, arena.getCollectedPages());
+        Bukkit.getPluginManager().callEvent(slenderSurvivorPickupPageEvent);
+
         if(arena.getCollectedPages() == 8) {
             arena.endGame();
             return;

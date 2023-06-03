@@ -16,7 +16,7 @@ public class ArenaDeleteArgument implements ArgumentCommand {
         }
         String id = args[1];
         if(SlenderMain.getInstance().getGameManager().getArena(id) == null) {
-            commandSender.sendMessage(ColourUtil.colorize("&cArena does not exist!"));
+            commandSender.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("no-arena"));
             return true;
         }
         Arena arena = SlenderMain.getInstance().getGameManager().getArena(id);

@@ -33,6 +33,8 @@ public class PlayerManager {
 
     public void loadLobby(Player player) {
         player.getInventory().setItem(0, CustomItem.ARENA_SELECTOR.toItemStack());
+        player.getInventory().setItem(3, CustomItem.PARTY_MENU.toItemStack());
+        player.getInventory().setItem(5, CustomItem.PERKS.toItemStack());
 
         ItemStack itemStack = CustomItem.MY_PROFILE.toItemStack();
         SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
@@ -53,6 +55,7 @@ public class PlayerManager {
         player.setFoodLevel(20);
         player.setBedSpawnLocation(null);
         player.setExp(0);
+        player.setGlowing(false);
         player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20);
         player.setHealth(20);
