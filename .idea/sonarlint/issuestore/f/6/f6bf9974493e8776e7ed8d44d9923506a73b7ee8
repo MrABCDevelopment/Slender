@@ -1,0 +1,9 @@
+
+^
+java:S5361W"HReplace this call to "replaceAll()" by a call to the "replace()" method.(‰ÛÍ’
+p
+java:S1854“"RRemove this useless assignment to local variable "slenderSurvivorPickupPageEvent".(Š‘ºÝ8±ÉÙ’ˆ1
+Y
+java:S1874…"=Remove this use of "PlayerPickupItemEvent"; it is deprecated.(ïþé üÿÿÿÿ
+a
+java:S1481“"CRemove this unused "slenderSurvivorPickupPageEvent" local variable.(Š‘ºÝ8³ÉÙ’ˆ1

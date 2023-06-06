@@ -60,6 +60,11 @@ messages:
   player-level-up: "&a&l❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚\n&r\n                    &f&lStop It Slender           \n&r\n\n                        &3&lLevel Up!
                          \n   &7You are getting better and better!\n     &7Thanks for playing this game!\n      &7Your current level: &b%LEVEL%\n&r\n&a&l❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚"
 
+  # Lobby announcements
+  click-here: '&aClick here!'
+  lobby-arena-starting-announcement: "&a&l❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚\n&r\n                    &f&lStop It Slender           \n&r\n
+                        &b&lArena &f&l%ARENA% &b&lis starting in 30 seconds!\n&r\n&a&l❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚"
+
   perks-selected: '&eYou selected %PERK% &efor %TEAM%'
 
   # Parties
@@ -77,6 +82,7 @@ messages:
   party-is-not-pending-request: '&cYou do not have pending request to join to the party!'
   party-invited-player: '&aYou invited %TARGET% to your party!'
   party-request-message: '&7You have new request to join to the party (click here to accept)'
+  party-too-many-players: '&cYou cannot join to this arena, because your party has too many members!'
 
   # Inventories
   status-on: '&aOn'

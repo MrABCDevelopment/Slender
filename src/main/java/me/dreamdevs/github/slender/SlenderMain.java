@@ -28,6 +28,7 @@ public class SlenderMain extends JavaPlugin {
     private PartyManager partyManager;
 
     private boolean useLibsDisguises = false;
+    private boolean usePerks;
 
     @Override
     public void onEnable() {
@@ -47,6 +48,7 @@ public class SlenderMain extends JavaPlugin {
         } else {
             Util.sendPluginMessage("&cLibsDisguises did not detected!");
         }
+        usePerks = getConfigManager().getConfig("perks.yml").getBoolean("Enabled");
 
         this.lobby = new Lobby();
         this.gameManager = new GameManager();
@@ -90,5 +92,7 @@ public class SlenderMain extends JavaPlugin {
         for(GamePlayer gamePlayer : getPlayerManager().getPlayers())
             this.database.saveData(gamePlayer);
         this.database.disconnect();
+
+        gameManager.saveGames();
     }
 }

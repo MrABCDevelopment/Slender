@@ -34,7 +34,9 @@ public class PlayerManager {
     public void loadLobby(Player player) {
         player.getInventory().setItem(0, CustomItem.ARENA_SELECTOR.toItemStack());
         player.getInventory().setItem(3, CustomItem.PARTY_MENU.toItemStack());
-        player.getInventory().setItem(5, CustomItem.PERKS.toItemStack());
+
+        if(SlenderMain.getInstance().isUsePerks())
+            player.getInventory().setItem(5, CustomItem.PERKS.toItemStack());
 
         ItemStack itemStack = CustomItem.MY_PROFILE.toItemStack();
         SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();

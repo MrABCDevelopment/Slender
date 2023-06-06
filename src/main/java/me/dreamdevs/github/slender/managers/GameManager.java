@@ -9,8 +9,13 @@ import me.dreamdevs.github.slender.game.ArenaState;
 import me.dreamdevs.github.slender.game.GamePlayer;
 import me.dreamdevs.github.slender.game.Role;
 import me.dreamdevs.github.slender.game.party.Party;
+import me.dreamdevs.github.slender.utils.ColourUtil;
 import me.dreamdevs.github.slender.utils.CustomItem;
 import me.dreamdevs.github.slender.utils.Util;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -19,6 +24,7 @@ import org.bukkit.entity.Player;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Getter
 public class GameManager {
@@ -51,7 +57,13 @@ public class GameManager {
                     player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("party-not-leader"));
                     return;
                 }
+
                 Party party = SlenderMain.getInstance().getPartyManager().getParty(gamePlayer);
+                if(arena.getMaxPlayers()-arena.getPlayers().size() < party.getMembersList().size()) {
+                    player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("party-too-many-players"));
+                    return;
+                }
+
                 party.getMembersList().forEach(member -> {
                     member.getPlayer().teleport(arena.getSlenderSpawnLocation());
                     member.clearInventory();
@@ -111,6 +123,8 @@ public class GameManager {
                 arena.setArenaState(ArenaState.STARTING);
                 arena.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-starting-info"));
                 arena.setTimer(30);
+                List<Player> lobbyPlayers = SlenderMain.getInstance().getPlayerManager().getPlayers().stream().filter(lobbyGamePlayer -> !lobbyGamePlayer.isInArena()).map(GamePlayer::getPlayer).collect(Collectors.toList());
+                sendArenaAnnouncement(arena, SlenderMain.getInstance().getMessagesManager().getMessage("lobby-arena-starting-announcement").replaceAll("%ARENA%", arena.getId()), SlenderMain.getInstance().getMessagesManager().getMessage("click-here"), lobbyPlayers);
             }
         } else {
             player.sendMessage(SlenderMain.getInstance().getMessagesManager().getMessage("arena-still-running"));
@@ -222,6 +236,16 @@ public class GameManager {
             arena.endGame();
         }
         return true;
+    }
+
+    private void sendArenaAnnouncement(Arena arena, String message, String hoverMessage, List<Player> players) {
+        TextComponent textComponent = new TextComponent(ColourUtil.colorize(message));
+        ComponentBuilder componentBuilder = new ComponentBuilder(ColourUtil.colorize(hoverMessage));
+
+        textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, componentBuilder.create()));
+        textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/stopitslender join "+arena.getId()));
+
+        players.forEach(player -> player.spigot().sendMessage(textComponent));
     }
 
 }
