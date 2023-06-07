@@ -21,6 +21,7 @@ public class CommandHandler implements TabExecutor {
     public CommandHandler(SlenderMain plugin) {
         this.arguments = new HashMap<>();
         registerCommand("setlobby", SetLobbyArgument.class);
+        registerCommand("admin", ArenaAdminArgument.class);
         registerCommand("createarena", ArenaCreateArgument.class);
         registerCommand("editarena", ArenaEditArgument.class);
         registerCommand("deletearena", ArenaDeleteArgument.class);

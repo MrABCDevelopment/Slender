@@ -1,0 +1,16 @@
+
+o
+java:S2293*"YReplace the type specification in this constructor call with the diamond operator ("<>").(È÷Ö½
+P
+java:S1141A"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+M
+java:S2629N"7Use the built-in formatting to construct this argument.(ž–Õó
+M
+java:S2629w"7Use the built-in formatting to construct this argument.(èÁˆŽ
+R
+java:S2629y"7Use the built-in formatting to construct this argument.(×þåýþÿÿÿÿ
+i
+java:S2095B"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(‡÷¢¢ùÿÿÿÿ
+h
+java:S37768"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(Ÿœ‚ž
+\	java:S899>"BDo something with the "boolean" value returned by "createNewFile".(‘ýÊùÿÿÿÿÿ
