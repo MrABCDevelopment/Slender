@@ -25,6 +25,8 @@ public enum Perks {
             SlenderMain.getInstance().getConfigManager().getConfig("perks.yml").getStringList("Slender-Perks.Dark-Abyss.PerkLore")),
     SLENDERMAN_PERK_FROM_THE_DARK(Material.COAL, SlenderMain.getInstance().getConfigManager().getConfig("perks.yml").getString("Slender-Perks.From-The-Dark.PerkName"),
             SlenderMain.getInstance().getConfigManager().getConfig("perks.yml").getStringList("Slender-Perks.From-The-Dark.PerkLore")),
+    SLENDERMAN_PERK_PAGES_BELONGINGS(Material.PAPER, SlenderMain.getInstance().getConfigManager().getConfig("perks.yml").getString("Slender-Perks.Pages-Belongings.PerkName"),
+            SlenderMain.getInstance().getConfigManager().getConfig("perks.yml").getStringList("Slender-Perks.Pages-Belongings.PerkLore")),
 
     /**
      * Survivor's perks

@@ -107,9 +107,7 @@ public class PlayerInteractListener implements Listener {
                 if(target == null)
                     return;
 
-                CompassMeta compassMeta = (CompassMeta) itemStack.getItemMeta();
-                compassMeta.setLodestone(target.getLocation());
-                itemStack.setItemMeta(compassMeta);
+                player.setCompassTarget(target.getLocation());
             }
 
         }

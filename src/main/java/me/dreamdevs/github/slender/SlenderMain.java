@@ -29,13 +29,14 @@ public class SlenderMain extends JavaPlugin {
 
     private boolean useLibsDisguises = false;
     private boolean usePerks;
+    private boolean useParties;
 
     @Override
     public void onEnable() {
         instance = this;
 
         this.configManager = new ConfigManager(this);
-        this.configManager.loadConfigFiles("items.yml", "messages.yml", "perks.yml");
+        this.configManager.loadConfigFiles("items.yml", "messages.yml", "perks.yml", "config.yml");
 
         this.database = new Database();
         this.database.connect("YAML");
@@ -49,15 +50,18 @@ public class SlenderMain extends JavaPlugin {
             Util.sendPluginMessage("&cLibsDisguises did not detected!");
         }
         usePerks = getConfigManager().getConfig("perks.yml").getBoolean("Enabled");
+        useParties = getConfigManager().getConfig("config.yml").getBoolean("use-parties");
 
         this.lobby = new Lobby();
         this.gameManager = new GameManager();
         this.playerManager = new PlayerManager();
 
-        this.partyManager = new PartyManager();
-
         new CommandHandler(this);
-        new PartyCommandHandler(this);
+
+        if(isUseParties()) {
+            this.partyManager = new PartyManager();
+            new PartyCommandHandler(this);
+        }
 
         getServer().getPluginManager().registerEvents(new PlayerListeners(), this);
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(), this);

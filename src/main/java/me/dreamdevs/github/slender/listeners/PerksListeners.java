@@ -40,7 +40,6 @@ public class PerksListeners implements Listener
             tokens.putIfAbsent(slender.getPlayer().getUniqueId(), 0);
         if(slender.getEquippedSlenderManPerk().equals(Perks.SLENDERMAN_PERK_DARK_ABYSS))
             darkAbyss.putIfAbsent(slender.getPlayer().getUniqueId(), false);
-
     }
 
     @EventHandler
@@ -129,6 +128,7 @@ public class PerksListeners implements Listener
                             players.add(player);
                         }
                     }
+                    betterTogether.put(gamePlayer.getPlayer().getUniqueId(), players);
                 }
                 Bukkit.getScheduler().runTaskLater(SlenderMain.getInstance(), () -> {
                     gamePlayer.getPlayer().removePotionEffect(PotionEffectType.NIGHT_VISION);
@@ -143,6 +143,7 @@ public class PerksListeners implements Listener
                             player.setSprinting(false);
                         }
                     }
+                    betterTogether.remove(gamePlayer.getPlayer().getUniqueId());
                 }, 40L);
             }
         }
