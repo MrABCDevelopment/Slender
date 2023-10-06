@@ -1,0 +1,281 @@
+Levels:
+  1:
+    Require-Exp: 100
+    Rewards:
+      - coins:5
+  2:
+    Require-Exp: 200
+    Rewards:
+      - coins:5
+  3:
+    Require-Exp: 300
+    Rewards:
+      - coins:5
+  4:
+    Require-Exp: 400
+    Rewards:
+      - coins:5
+  5:
+    Require-Exp: 500
+    Rewards:
+      - coins:10
+  6:
+    Require-Exp: 600
+    Rewards:
+      - coins:5
+  7:
+    Require-Exp: 700
+    Rewards:
+      - coins:5
+  8:
+    Require-Exp: 800
+    Rewards:
+      - coins:5
+  9:
+    Require-Exp: 900
+    Rewards:
+      - coins:5
+  10:
+    Require-Exp: 1000
+    Rewards:
+      - coins:10
+  11:
+    Require-Exp: 1100
+    Rewards:
+      - coins:10
+  12:
+    Require-Exp: 1200
+    Rewards:
+      - coins:10
+  13:
+    Require-Exp: 1300
+    Rewards:
+      - coins:5
+  14:
+    Require-Exp: 1400
+    Rewards:
+      - coins:5
+  15:
+    Require-Exp: 1500
+    Rewards:
+      - coins:10
+  16:
+    Require-Exp: 1600
+    Rewards:
+      - coins:5
+  17:
+    Require-Exp: 1700
+    Rewards:
+      - coins:5
+  18:
+    Require-Exp: 1800
+    Rewards:
+      - coins:5
+  19:
+    Require-Exp: 1900
+    Rewards:
+      - coins:5
+  20:
+    Require-Exp: 2000
+    Rewards:
+      - coins:10
+  21:
+    Require-Exp: 2100
+    Rewards:
+      - coins:10
+  22:
+    Require-Exp: 2200
+    Rewards:
+      - coins:10
+  23:
+    Require-Exp: 2300
+    Rewards:
+      - coins:5
+  24:
+    Require-Exp: 2400
+    Rewards:
+      - coins:5
+  25:
+    Require-Exp: 2500
+    Rewards:
+      - coins:10
+  26:
+    Require-Exp: 2600
+    Rewards:
+      - coins:5
+  27:
+    Require-Exp: 2700
+    Rewards:
+      - coins:5
+  28:
+    Require-Exp: 2800
+    Rewards:
+      - coins:5
+  29:
+    Require-Exp: 2900
+    Rewards:
+      - coins:5
+  30:
+    Require-Exp: 3000
+    Rewards:
+      - coins:10
+  31:
+    Require-Exp: 3100
+    Rewards:
+      - coins:10
+  32:
+    Require-Exp: 3200
+    Rewards:
+      - coins:10
+  33:
+    Require-Exp: 3300
+    Rewards:
+      - coins:5
+  34:
+    Require-Exp: 3400
+    Rewards:
+      - coins:5
+  35:
+    Require-Exp: 3500
+    Rewards:
+      - coins:10
+  36:
+    Require-Exp: 3600
+    Rewards:
+      - coins:5
+  37:
+    Require-Exp: 3700
+    Rewards:
+      - coins:5
+  38:
+    Require-Exp: 3800
+    Rewards:
+      - coins:5
+  39:
+    Require-Exp: 3900
+    Rewards:
+      - coins:5
+  40:
+    Require-Exp: 4000
+    Rewards:
+      - coins:10
+  41:
+    Require-Exp: 4100
+    Rewards:
+      - coins:10
+  42:
+    Require-Exp: 4200
+    Rewards:
+      - coins:10
+  43:
+    Require-Exp: 4300
+    Rewards:
+      - coins:5
+  44:
+    Require-Exp: 4400
+    Rewards:
+      - coins:5
+  45:
+    Require-Exp: 4500
+    Rewards:
+      - coins:10
+  46:
+    Require-Exp: 4600
+    Rewards:
+      - coins:5
+  47:
+    Require-Exp: 4700
+    Rewards:
+      - coins:5
+  48:
+    Require-Exp: 4800
+    Rewards:
+      - coins:5
+  49:
+    Require-Exp: 4900
+    Rewards:
+      - coins:5
+  50:
+    Require-Exp: 5000
+    Rewards:
+      - coins:20
+  51:
+    Require-Exp: 5250
+    Rewards:
+      - coins:15
+  52:
+    Require-Exp: 5500
+    Rewards:
+      - coins:15
+  53:
+    Require-Exp: 5750
+    Rewards:
+      - coins:15
+  54:
+    Require-Exp: 6000
+    Rewards:
+      - coins:15
+  55:
+    Require-Exp: 6250
+    Rewards:
+      - coins:20
+  56:
+    Require-Exp: 6500
+    Rewards:
+      - coins:15
+  57:
+    Require-Exp: 6750
+    Rewards:
+      - coins:15
+  58:
+    Require-Exp: 7000
+    Rewards:
+      - coins:15
+  59:
+    Require-Exp: 7250
+    Rewards:
+      - coins:15
+  60:
+    Require-Exp: 7500
+    Rewards:
+      - coins:20
+  61:
+    Require-Exp: 7750
+    Rewards:
+      - coins:15
+  62:
+    Require-Exp: 8000
+    Rewards:
+      - coins:15
+  63:
+    Require-Exp: 8250
+    Rewards:
+      - coins:15
+  64:
+    Require-Exp: 8500
+    Rewards:
+      - coins:15
+  65:
+    Require-Exp: 8750
+    Rewards:
+      - coins:20
+  66:
+    Require-Exp: 9000
+    Rewards:
+      - coins:15
+  67:
+    Require-Exp: 9250
+    Rewards:
+      - coins:15
+  68:
+    Require-Exp: 9500
+    Rewards:
+      - coins:15
+  69:
+    Require-Exp: 9750
+    Rewards:
+      - coins:15
+  70:
+    Require-Exp: 10000
+    Rewards:
+      - coins:20

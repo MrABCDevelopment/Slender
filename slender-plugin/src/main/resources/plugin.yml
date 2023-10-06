@@ -1,0 +1,17 @@
+name: ${project.name}
+version: ${project.version}
+main: me.dreamdevs.slender.SlenderMain
+author: DreamDevs
+api-version: 1.13
+
+softdepend:
+  - ProtocolLib
+  - LibsDisguises
+
+commands:
+  stopitslender:
+    aliases: [slender, slenderman, sis]
+    description: Main StopItSlender command
+  party:
+    aliases: [slenderparty]
+    description: Party StopItSlender command

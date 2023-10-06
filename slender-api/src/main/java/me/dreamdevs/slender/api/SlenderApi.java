@@ -1,0 +1,30 @@
+package me.dreamdevs.slender.api;
+
+import me.dreamdevs.slender.api.inventory.handlers.ItemMenuListener;
+import me.dreamdevs.slender.api.utils.Util;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class SlenderApi {
+
+	public static JavaPlugin plugin;
+
+	public static boolean isLibsDisguisedEnabled;
+
+	public static void loadApi(JavaPlugin plugin) {
+		Util.sendPluginMessage("&aLoading Stop It Slender API...");
+
+		SlenderApi.plugin = plugin;
+		ItemMenuListener.getInstance().register(SlenderApi.plugin);
+
+		isLibsDisguisedEnabled = Bukkit.getPluginManager().getPlugin("LibsDisguised") != null;
+		if(isLibsDisguisedEnabled) {
+			Util.sendPluginMessage("&aLibsDisguises detected!");
+		} else {
+			Util.sendPluginMessage("&cLibsDisguises did not detected!");
+		}
+
+		Util.sendPluginMessage("&aSuccessfully registered Stop It Slender API!");
+	}
+
+}
