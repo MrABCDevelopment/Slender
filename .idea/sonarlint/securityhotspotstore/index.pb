@@ -43,3 +43,17 @@ o
 ?slender-api/src/main/java/me/dreamdevs/slender/api/Setting.java,e\1\e1104f56d965de5995d63fea08bc41d135af3d0e
 r
 Bslender-api/src/main/java/me/dreamdevs/slender/api/SlenderApi.java,e\5\e5fb40fcc925b78933e96fb3357605f1d5b0ed3f
+ˆ
+Xslender-api/src/main/java/me/dreamdevs/slender/api/inventory/buttons/ReturnMenuItem.java,d\2\d206a2f86f5219ddc150149b46c4dcb5866ffb4d
+~
+Nslender-api/src/main/java/me/dreamdevs/slender/api/inventory/BookItemMenu.java,b\5\b5a0760ea3105c5f6699c45f900a0c3f4df6c8b1
+y
+Islender-plugin/src/main/java/me/dreamdevs/slender/menus/SettingsMenu.java,3\0\3024664befb0c33d1912a08e1b55ceb7c58b4e1b
+v
+Fslender-plugin/src/main/java/me/dreamdevs/slender/game/CustomItem.java,6\b\6b957a5fb0dcac81dcda802b256c450168a8a9ba
+‹
+[slender-api/src/main/java/me/dreamdevs/slender/api/inventory/handlers/ItemClickHandler.java,b\b\bb02ad6a741f5c78062ce0a21cd8d07a9461edf9
+z
+Jslender-api/src/main/java/me/dreamdevs/slender/api/inventory/ItemMenu.java,e\7\e7bbf6d75056ea8767e6e21a77a6c0c6e9b6cd52
+€
+Pslender-api/src/main/java/me/dreamdevs/slender/api/inventory/ItemMenuHolder.java,7\1\713388e3df31d0b295a94f7062166a5a23b3c0ec

@@ -179,7 +179,7 @@ public class Arena extends BukkitRunnable implements IArena {
         slenderMan.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(40);
         slenderMan.setHealth(40);
         slenderMan.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, Integer.MAX_VALUE));
-        if(SlenderApi.isLibsDisguisedEnabled) {
+        if (SlenderApi.isLibsDisguisedEnabled) {
             DisguiseAPI.disguiseToAll(slenderMan, new MobDisguise(DisguiseType.ENDERMAN));
             DisguiseAPI.setActionBarShown(slenderMan, false);
             DisguiseAPI.setViewDisguiseToggled(slenderMan, false);

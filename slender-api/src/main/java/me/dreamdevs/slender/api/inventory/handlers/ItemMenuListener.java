@@ -10,7 +10,6 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.server.PluginDisableEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredListener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -55,13 +54,7 @@ public class ItemMenuListener implements Listener {
 	}
 
 	public static void closeOpenMenus() {
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (player.getOpenInventory() != null) {
-				Inventory inventory = player.getOpenInventory().getTopInventory();
-				if (inventory.getHolder() instanceof ItemMenuHolder) {
-					player.closeInventory();
-				}
-			}
-		}
+		Bukkit.getOnlinePlayers().stream().filter(player -> player.getOpenInventory().getTopInventory().getHolder() instanceof ItemMenuHolder)
+				.forEach(Player::closeInventory);
 	}
 }

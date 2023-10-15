@@ -30,7 +30,7 @@ public class BookItemMenu {
 		this.mainPage = new BookItemMenu.BookPage(title + (showPage ? " | Page 1" : ""), fitSize ? ItemMenu.Size.fit(icons.size()) : ItemMenu.Size.SIX_LINE, 0);
 
 		icons.forEach(menuItem -> {
-			if(counter.getAndIncrement() == getMainPage().getSize().getSize()-9) {
+			if (counter.getAndIncrement() == getMainPage().getSize().getSize()-9) {
 				counter.set(0);
 				page.incrementAndGet();
 			}
@@ -45,7 +45,7 @@ public class BookItemMenu {
 		this.pages.values().parallelStream().forEach(bookPage -> {
 			int slot = bookPage.getPageNumber()-1;
 			int pageNumber = bookPage.getPageNumber();
-			if(slot >= 0) {
+			if (slot >= 0) {
 				ItemMenu returnMenu = this.pages.get(slot);
 				if(returnMenu != null) {
 					ReturnMenuItem returnMenuItem = backButton != null ? backButton : new ReturnMenuItem(returnMenu);

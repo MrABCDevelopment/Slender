@@ -9,6 +9,7 @@ import me.dreamdevs.slender.api.SlenderApi;
 import me.dreamdevs.slender.api.events.ItemClickEvent;
 import me.dreamdevs.slender.api.inventory.buttons.MenuItem;
 import me.dreamdevs.slender.api.inventory.handlers.ItemMenuListener;
+import me.dreamdevs.slender.api.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -73,12 +74,9 @@ public class ItemMenu {
 	 *            The {@link MenuItem}.
 	 * @return The {@link MenuItem}.
 	 */
-	public ItemMenu fillEmptySlots(MenuItem menuItem)
-	{
-		for (int i = 0; i < items.length; i++)
-		{
-			if (items[i] == null)
-			{
+	public ItemMenu fillEmptySlots(MenuItem menuItem) {
+		for (int i = 0; i < items.length; i++) {
+			if (items[i] == null) {
 				items[i] = menuItem;
 			}
 		}
@@ -120,43 +118,34 @@ public class ItemMenu {
 		return slot >= 0 && slot <= size.size ? items[slot] : null;
 	}
 
-	public void onInventoryClick(InventoryClickEvent event)
-	{
-		if (event.getClick() == ClickType.LEFT || event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_LEFT || event.getClick() == ClickType.SHIFT_RIGHT)
-		{
+	public void onInventoryClick(InventoryClickEvent event) {
+		if (event.getClick() == ClickType.LEFT || event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_LEFT || event.getClick() == ClickType.SHIFT_RIGHT) {
 			int slot = event.getRawSlot();
-			if (slot >= 0 && slot < size.getSize() && items[slot] != null)
-			{
+			Util.sendPluginMessage("Passed 1");
+			if (slot >= 0 && slot < size.getSize() && items[slot] != null) {
+				Util.sendPluginMessage("Passed 2");
 				Player player = (Player) event.getWhoClicked();
-				ItemClickEvent itemClickEvent = new ItemClickEvent(player,event.getCurrentItem(),event.getClick());
+				ItemClickEvent itemClickEvent = new ItemClickEvent(player, event.getCurrentItem(), event.getClick());
 				items[slot].onItemClick(itemClickEvent);
+				Util.sendPluginMessage("Passed 3");
 				if (itemClickEvent.willUpdate()) {
 					update(player);
-				}
-				else
-				{
+				} else {
 					player.updateInventory();
-					if (itemClickEvent.willClose()
-							|| itemClickEvent.willGoBack()) {
+					if (itemClickEvent.willClose() || itemClickEvent.willGoBack()) {
 						final String playerName = player.getName();
-						Bukkit.getScheduler().scheduleSyncDelayedTask(
-								SlenderApi.plugin, () -> {
-									Player p = Bukkit
-											.getPlayerExact(playerName);
-									if (p != null)
-									{
+						Bukkit.getScheduler().scheduleSyncDelayedTask(SlenderApi.plugin, () -> {
+									Player p = Bukkit.getPlayerExact(playerName);
+									if (p != null) {
 										p.closeInventory();
 									}
 								}, 1);
 					}
-					if (itemClickEvent.willGoBack() && hasParent())
-					{
+					if (itemClickEvent.willGoBack() && hasParent()) {
 						final String playerName = player.getName();
-						Bukkit.getScheduler().scheduleSyncDelayedTask(
-								SlenderApi.plugin, (Runnable) () -> {
+						Bukkit.getScheduler().scheduleSyncDelayedTask(SlenderApi.plugin, () -> {
 									Player p = Bukkit.getPlayerExact(playerName);
-									if (p != null)
-									{
+									if (p != null) {
 										parent.open(p);
 									}
 								}, 3);
@@ -173,8 +162,7 @@ public class ItemMenu {
 	/**
 	 * Destroys the {@link MenuItem}.
 	 */
-	public void destroy()
-	{
+	public void destroy() {
 		name = null;
 		size = null;
 		items = null;
@@ -184,8 +172,7 @@ public class ItemMenu {
 	/**
 	 * Possible sizes of an {@link MenuItem}.
 	 */
-	public enum Size
-	{
+	public enum Size {
 		ONE_LINE(9), TWO_LINE(18), THREE_LINE(27), FOUR_LINE(36), FIVE_LINE(45), SIX_LINE(54);
 
 		private final int size;
@@ -195,30 +182,18 @@ public class ItemMenu {
 			this.size = size;
 		}
 
-		public static Size fit(int slots)
-		{
-			if (slots < 10)
-			{
+		public static Size fit(int slots) {
+			if (slots < 10) {
 				return ONE_LINE;
-			}
-			else if (slots < 19)
-			{
+			} else if (slots < 19) {
 				return TWO_LINE;
-			}
-			else if (slots < 28)
-			{
+			} else if (slots < 28) {
 				return THREE_LINE;
-			}
-			else if (slots < 37)
-			{
+			} else if (slots < 37) {
 				return FOUR_LINE;
-			}
-			else if (slots < 46)
-			{
+			} else if (slots < 46) {
 				return FIVE_LINE;
-			}
-			else
-			{
+			} else {
 				return SIX_LINE;
 			}
 		}

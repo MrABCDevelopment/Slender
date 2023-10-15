@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class ReturnMenuItem extends MenuItem {
+
 	private ItemMenu returnMenu;
 
 	public ReturnMenuItem(ItemMenu returnMenu) {
@@ -26,4 +27,5 @@ public class ReturnMenuItem extends MenuItem {
 			event.setWillClose(true);
 		}
 	}
+
 }

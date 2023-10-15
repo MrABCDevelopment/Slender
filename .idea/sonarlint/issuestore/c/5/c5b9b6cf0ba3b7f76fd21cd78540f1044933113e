@@ -1,9 +1,5 @@
 
 »
-java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(ñ œÎüÿÿÿÿ8ŞÏ›ß¯1
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(ñ œÎüÿÿÿÿ8ŞÏ›ß¯1
 g
-java:S1124"EReorder the modifiers to comply with the Java Language Specification.(˜ÑŠæşÿÿÿÿ8çæÆ÷ª1
-Z
-java:S1854"8Remove this useless assignment to local variable "menu".(ûäûñûÿÿÿÿ8çæÆ÷ª1
-K
-java:S1481")Remove this unused "menu" local variable.(ûäûñûÿÿÿÿ8éæÆ÷ª1
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(˜ÑŠæşÿÿÿÿ8çæÆ÷ª1

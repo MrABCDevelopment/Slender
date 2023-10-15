@@ -12,13 +12,14 @@ public class SlenderApi {
 	public static boolean isLibsDisguisedEnabled;
 
 	public static void loadApi(JavaPlugin plugin) {
+		SlenderApi.plugin = plugin;
+
 		Util.sendPluginMessage("&aLoading Stop It Slender API...");
 
-		SlenderApi.plugin = plugin;
-		ItemMenuListener.getInstance().register(SlenderApi.plugin);
+		ItemMenuListener.getInstance().register(plugin);
 
-		isLibsDisguisedEnabled = Bukkit.getPluginManager().getPlugin("LibsDisguised") != null;
-		if(isLibsDisguisedEnabled) {
+		isLibsDisguisedEnabled = Bukkit.getPluginManager().getPlugin("LibsDisguises") != null;
+		if (isLibsDisguisedEnabled) {
 			Util.sendPluginMessage("&aLibsDisguises detected!");
 		} else {
 			Util.sendPluginMessage("&cLibsDisguises did not detected!");
